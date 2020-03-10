@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://testing/ViewportToMesh/UiTest.gd" type="Script" id=1]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+margin_right = 424.0
+margin_bottom = 424.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_right = 96.0
+margin_bottom = 424.0
+text = "TEEEEEEEEEST"
+
+[node name="Control" type="CheckButton" parent="."]
+margin_left = 100.0
+margin_right = 176.0
+margin_bottom = 424.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 180.0
+margin_top = 196.0
+margin_right = 224.0
+margin_bottom = 227.0
+text = ":))))))))))
+"
