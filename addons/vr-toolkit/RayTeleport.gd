@@ -3,7 +3,7 @@ extends "res://addons/vr-toolkit/ARVRControllerExtension.gd"
 
 export(float) var min_pitch = -80
 export(float) var max_pitch = 130
-export(float) var max_distance = 5000
+export(float) var max_distance = 500
 export(float) var cast_height = 6
 export(float) var controller_degree_compensation = -60
 export(Color) var can_teleport = Color.green
@@ -82,6 +82,12 @@ func _find_cast_position():
 	# The origin of the tall_ray is the arvr origin + a given height above
 	var cast_position = origin.get_global_transform().origin + Vector3.UP * cast_height
 	var cast_direction = horizontal_point - tall_ray.global_transform.origin
+	
+	# On very high pitches the cast_height has to scale up aswell, otherwise the 
+	# tall_ray's cast_to will almost never collide with anything
+#	var pitch = horizontal_ray.global_transform.basis.get_euler().x
+#	if pitch < 0.8:
+#		cast_position += Vector3.UP * pitch * 50
 
 	tall_ray.global_transform.origin = cast_position
 	tall_ray.cast_to = cast_direction
@@ -91,22 +97,25 @@ func _draw_bezier():
 	var start_pos = controller.get_global_transform().origin
 	var end_pos
 	var mid_pos
-	var direction = (tall_ray.to_global(tall_ray.cast_to) - start_pos).normalized()
-	var forward = -(horizontal_ray.get_global_transform().basis.z)
 	
 	if tall_ray.is_colliding():
 		end_pos = tall_ray.get_collision_point()
 	else:
-		end_pos = tall_ray.to_global(tall_ray.cast_to) + Vector3.DOWN * 50
+		# In order to get a better feeling of where to navigate the bezier curve
+		# when not colliding, the end point will be translated to a position downwards
+		# the world coordinates of the actual casting direction of the ray.
+		# This is multiplied by the max_distance so it is dynamic.
+		end_pos = tall_ray.to_global(tall_ray.cast_to) + Vector3.DOWN * max_distance / 100
 	
 	var distance = start_pos.distance_to(end_pos)
+	# The mid point will get higher, the further away the collision happens
 	mid_pos = (end_pos + start_pos) / 2 + Vector3.UP * (distance / 10)
 
 	bezier.set_point_position(0, start_pos)
 	bezier.set_point_position(1, mid_pos)
 	bezier.set_point_position(2, end_pos)
 	# Also set the in- and out-point (this makes the bezier effect)
-	direction = (end_pos - start_pos).normalized()
+	var direction = (end_pos - start_pos).normalized()
 	bezier.set_point_in(1, direction * -2)
 	bezier.set_point_out(1, direction * 2)
 
