@@ -26,6 +26,7 @@ transmission = Color( 1, 0, 0.984314, 1 )
 [node name="ARVRControllerExtension" type="Spatial"]
 script = ExtResource( 1 )
 _origin_path = NodePath("../..")
+min_pitch = -160.0
 visualizer_material = SubResource( 1 )
 
 [node name="HorizontalRay" type="RayCast" parent="."]

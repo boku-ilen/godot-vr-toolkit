@@ -94,7 +94,8 @@ func _draw_bezier():
 	else:
 		end_pos = tall_ray.to_global(tall_ray.cast_to)
 	
-	var mid_pos = (end_pos + start_pos) / 2 + Vector3.UP * cast_height
+	var distance = start_pos.distance_to(end_pos)
+	var mid_pos = (end_pos + start_pos) / 2 + Vector3.UP * (distance / 10)  
 	
 	bezier.set_point_position(0, start_pos)
 	bezier.set_point_position(1, mid_pos)
