@@ -13,6 +13,7 @@ __meta__ = {
 [node name="Button" type="Button" parent="."]
 margin_right = 96.0
 margin_bottom = 424.0
+toggle_mode = true
 text = "TEEEEEEEEEST"
 
 [node name="Control" type="CheckButton" parent="."]

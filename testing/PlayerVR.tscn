@@ -10,6 +10,7 @@
 [node name="ARVROrigin" type="ARVROrigin" parent="."]
 
 [node name="ARVRCamera" type="ARVRCamera" parent="ARVROrigin"]
+far = 647.1
 
 [node name="OVRController" parent="ARVROrigin" instance=ExtResource( 4 )]
 

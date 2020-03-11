@@ -20,7 +20,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="New Game Project"
+config/name="VR-Toolkit"
+run/main_scene="res://testing/test.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]

@@ -95,6 +95,9 @@ size = Vector2( 424, 424 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.445556, 0 )
 script = ExtResource( 7 )
 
+[node name="ARVRCamera" parent="Player/ARVROrigin" index="0"]
+far = 1558.0
+
 [node name="Compass" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00404, -1.5636 )
 
