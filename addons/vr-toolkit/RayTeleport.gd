@@ -1,11 +1,11 @@
 extends "res://addons/vr-toolkit/ARVRControllerExtension.gd"
 
 
-export var collision_mask = 1
 export(float) var min_pitch = -80
 export(float) var max_pitch = 90
 export(float) var max_distance = 5000
 export(float) var cast_height = 6
+export(float) var controller_degree_compensation = -50
 export(Color) var can_teleport = Color.green
 export(Color) var cannot_teleport = Color.red
 
@@ -27,6 +27,8 @@ func _ready():
 	visualizer.set_material_override(visualizer_material)
 	position_indicator.set_material_override(visualizer_material)
 	_init_bezier()
+	horizontal_ray.rotation_degrees.x = controller_degree_compensation
+	tall_ray.global_transform.origin = origin.global_transform.origin + Vector3.UP * cast_height
 
 
 # Because we need to have 3 points to draw the bezier we have to initialize them
@@ -45,7 +47,6 @@ func on_button_pressed(id):
 
 
 func _process(delta):
-	tall_ray.global_transform.origin = origin.global_transform.origin + Vector3.UP * cast_height
 	_find_horizontal_point()
 	_find_cast_position()
 	
