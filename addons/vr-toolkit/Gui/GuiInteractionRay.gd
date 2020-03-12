@@ -3,6 +3,8 @@ extends "res://addons/vr-toolkit/ARVRControllerExtension.gd"
 export(float) var ray_length = 100
 export(SpatialMaterial) var visualizer_material = SpatialMaterial.new()
 export(float) var point_radius = 0.04
+export(bool) var enabled = true
+export(int) var interact_id = 15
 
 onready var interact_ray: RayCast = get_node("RayCast")
 onready var line_visualizer = get_node("ImmediateGeometry")
@@ -23,16 +25,20 @@ func _ready():
 
 
 func _process(delta):
-	if interact_ray.is_colliding():
-		point_visualizer.set_visible(true)
-		point_visualizer.global_transform.origin = interact_ray.get_collision_point()
-		if interact_ray.get_collider().get_parent().is_in_group("VRGui"):
-			var from = global_transform.origin
-			var to = interact_ray.get_collision_point()
-			
-			interact_ray.get_collider().get_parent().ray_interaction_input(from, to, InputEventMouseMotion)
+	if enabled:
+		show()
+		if interact_ray.is_colliding():
+			point_visualizer.set_visible(true)
+			point_visualizer.global_transform.origin = interact_ray.get_collision_point()
+			if interact_ray.get_collider().is_in_group("VRGui"):
+				var from = global_transform.origin
+				var to = interact_ray.get_collision_point()
+				
+				interact_ray.get_collider().get_parent().ray_interaction_input(from, to, InputEventMouseMotion)
+		else:
+			point_visualizer.set_visible(false)
 	else:
-		point_visualizer.set_visible(false)
+		hide()
 
 
 func draw_line(var begin: Vector3, var end: Vector3):
@@ -44,16 +50,18 @@ func draw_line(var begin: Vector3, var end: Vector3):
 
 
 func on_button_pressed(id: int):
-	if id == 15:
-		if interact_ray.get_collider().get_parent().is_in_group("VRGui"):
-			var from = global_transform.origin
-			var to = interact_ray.get_collision_point()
-			interact_ray.get_collider().get_parent().ray_interaction_input(from, to, InputEventMouseButton, true)
+	if enabled:
+		if id == interact_id:
+			if not interact_ray.get_collider() == null and interact_ray.get_collider().is_in_group("VRGui"):
+				var from = global_transform.origin
+				var to = interact_ray.get_collision_point()
+				interact_ray.get_collider().get_parent().ray_interaction_input(from, to, InputEventMouseButton, true)
 
 
 func on_button_released(id: int):
-	if id == 15:
-		if interact_ray.get_collider().get_parent().is_in_group("VRGui"):
-			var from = global_transform.origin
-			var to = interact_ray.get_collision_point()
-			interact_ray.get_collider().get_parent().ray_interaction_input(from, to, InputEventMouseButton, false)
+	if enabled:
+		if id == interact_id:
+			if not interact_ray.get_collider() == null and interact_ray.get_collider().is_in_group("VRGui"):
+				var from = global_transform.origin
+				var to = interact_ray.get_collision_point()
+				interact_ray.get_collider().get_parent().ray_interaction_input(from, to, InputEventMouseButton, false)
