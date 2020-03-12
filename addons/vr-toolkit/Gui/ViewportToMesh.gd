@@ -22,16 +22,13 @@ func _ready():
 	set_surface_material(0, material)
 
 
-func ray_interaction_input(from: Vector3, to: Vector3, event_type, pressed=true):
-	var result = get_world().direct_space_state.intersect_ray(from, to, [], area.collision_layer, false, true)
-	if not result.size() > 0:
-		return
-		
-	var position3D = result.position
+func ray_interaction_input(from: Vector3, to: Vector3, event_type, pressed=null):
+
+	var position3D = to
 	
 	position3D = area.global_transform.affine_inverse() * position3D
 	
-	var position2D = Vector2(position3D.x, -position3D.z)
+	var position2D = Vector2(position3D.x, position3D.z)
 	
 	# Right now the event position's range is the following: (-quad_size/2) -> (quad_size/2)
 	# We need to convert it into the following range: 0 -> quad_size
