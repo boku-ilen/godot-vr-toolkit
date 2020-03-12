@@ -1,10 +1,10 @@
 extends "res://addons/vr-toolkit/ARVRControllerExtension.gd"
 
+export(int) var interact_id = 15
 export(float) var ray_length = 100
 export(SpatialMaterial) var visualizer_material = SpatialMaterial.new()
 export(float) var point_radius = 0.04
 export(bool) var enabled = true
-export(int) var interact_id = 15
 
 onready var interact_ray: RayCast = get_node("RayCast")
 onready var line_visualizer = get_node("ImmediateGeometry")
@@ -31,10 +31,9 @@ func _process(delta):
 			point_visualizer.set_visible(true)
 			point_visualizer.global_transform.origin = interact_ray.get_collision_point()
 			if interact_ray.get_collider().is_in_group("VRGui"):
-				var from = global_transform.origin
-				var to = interact_ray.get_collision_point()
+				var interaction_point = interact_ray.get_collision_point()
 				
-				interact_ray.get_collider().get_parent().ray_interaction_input(from, to, InputEventMouseMotion)
+				interact_ray.get_collider().get_parent().ray_interaction_input(interaction_point, InputEventMouseMotion, controller.controller_id)
 		else:
 			point_visualizer.set_visible(false)
 	else:
@@ -53,15 +52,13 @@ func on_button_pressed(id: int):
 	if enabled:
 		if id == interact_id:
 			if not interact_ray.get_collider() == null and interact_ray.get_collider().is_in_group("VRGui"):
-				var from = global_transform.origin
-				var to = interact_ray.get_collision_point()
-				interact_ray.get_collider().get_parent().ray_interaction_input(from, to, InputEventMouseButton, true)
+				var interaction_point = interact_ray.get_collision_point()
+				interact_ray.get_collider().get_parent().ray_interaction_input(interaction_point, InputEventMouseButton, controller.controller_id, true)
 
 
 func on_button_released(id: int):
 	if enabled:
 		if id == interact_id:
 			if not interact_ray.get_collider() == null and interact_ray.get_collider().is_in_group("VRGui"):
-				var from = global_transform.origin
-				var to = interact_ray.get_collision_point()
-				interact_ray.get_collider().get_parent().ray_interaction_input(from, to, InputEventMouseButton, false)
+				var interaction_point = interact_ray.get_collision_point()
+				interact_ray.get_collider().get_parent().ray_interaction_input(interaction_point, InputEventMouseButton, controller.controller_id, false)
