@@ -2,6 +2,7 @@ extends RigidBody
 class_name  InteractableObject
 
 var controller: ARVRController
+var _is_picked_up: bool = false
 
 
 func _ready():
@@ -14,6 +15,7 @@ func interact():
 
 func picked_up(my_controller: ARVRController):
 	controller =  my_controller
+	_is_picked_up = true
 
 
 func dropped():
@@ -24,4 +26,5 @@ func dropped():
 		var direction = controller.global_transform.origin - position_before
 		apply_impulse(transform.origin, direction * 100)
 		controller = null
-
+	
+	_is_picked_up = false

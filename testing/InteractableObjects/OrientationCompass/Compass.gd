@@ -5,7 +5,6 @@ extends InteractableObject
 # Rotates with the latest global player position from PlayerInfo.
 #
 
-var _is_picked_up: bool = false
 onready var compass_symbol = get_node("Spatial")
 
 
@@ -18,13 +17,3 @@ func _process(delta):
 		var new_right = new_forward.cross(new_up)
 		
 		compass_symbol.global_transform.basis = Basis(new_right, new_up, -new_forward)
-
-
-func picked_up(my_controller: ARVRController):
-	.picked_up(my_controller)
-	_is_picked_up = true
-
-
-func dropped():
-	.dropped()
-	_is_picked_up = false

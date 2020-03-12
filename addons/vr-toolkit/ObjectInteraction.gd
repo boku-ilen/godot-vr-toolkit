@@ -1,6 +1,7 @@
 extends "res://addons/vr-toolkit/ARVRControllerExtension.gd"
 
 export(int) var pick_up_button_id = 2
+export(int) var interact_id = 15
 
 onready var area = get_node("Area")
 
@@ -23,6 +24,9 @@ func on_button_released(id: int):
 func on_button_pressed(id: int):
 	if id == pick_up_button_id:
 		current_object = _try_pick_up_interactable()
+	if id == interact_id:
+		if not current_object == null:
+			current_object.interact()
 
 
 func _try_pick_up_interactable():
