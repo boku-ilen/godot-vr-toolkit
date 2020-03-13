@@ -26,6 +26,7 @@ render_target_update_mode = 3
 [node name="Area" type="Area" parent="." groups=[
 "VRGui",
 ]]
+collision_layer = 524289
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 2 )

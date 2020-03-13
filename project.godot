@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "InteractableObject",
 "language": "GDScript",
 "path": "res://addons/vr-toolkit/InteractableObject.gd"
+}, {
+"base": "Control",
+"class": "VRGuiElement",
+"language": "GDScript",
+"path": "res://addons/vr-toolkit/Gui/GuiElement.gd"
 } ]
 _global_script_class_icons={
-"InteractableObject": ""
+"InteractableObject": "",
+"VRGuiElement": ""
 }
 
 [application]
@@ -24,6 +30,10 @@ config/name="VR-Toolkit"
 run/main_scene="res://testing/test.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalVRAccess="*res://addons/vr-toolkit/GlobalVRAccess.gd"
+
 [editor_plugins]
 
 enabled=PoolStringArray( "vr-toolkit" )
@@ -31,6 +41,10 @@ enabled=PoolStringArray( "vr-toolkit" )
 [gdnative]
 
 singletons=[ "res://addons/godot-openvr/godot_openvr.gdnlib" ]
+
+[layer_names]
+
+3d_physics/layer_20="VRGui"
 
 [rendering]
 

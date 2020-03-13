@@ -5,16 +5,17 @@ export(PackedScene) var viewport_element
 export(bool) var create_collision_areas = false
 
 onready var viewport = get_node("Viewport")
-onready var viewport_texture = viewport_element.instance()
 onready var area = get_node("Area")
 # The size of the quad mesh itself.
 onready var quad_mesh_size = mesh.size
 
+var viewport_texture
 var material = SpatialMaterial.new()
 var last_pos2D
 
 
 func _ready():
+	viewport_texture = viewport_element.instance()
 	viewport.add_child(viewport_texture)
 	material.albedo_texture = viewport.get_texture()
 	material.flags_unshaded = true
@@ -22,9 +23,7 @@ func _ready():
 	set_surface_material(0, material)
 
 
-func ray_interaction_input(from: Vector3, to: Vector3, event_type, pressed=null):
-
-	var position3D = to
+func ray_interaction_input(position3D: Vector3, event_type, device_id, pressed=null):
 	
 	position3D = area.global_transform.affine_inverse() * position3D
 	
@@ -63,6 +62,9 @@ func ray_interaction_input(from: Vector3, to: Vector3, event_type, pressed=null)
 	# Set the event's position and global position.
 	event.position = position2D
 	event.global_position = position2D
+	
+	# Set the id of the device to the id of the controller
+	event.device = device_id
 	
 	# Finally, send the processed input event to the viewport.
 	viewport.input(event)
