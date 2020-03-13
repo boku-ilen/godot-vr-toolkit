@@ -21,6 +21,7 @@ visualizer_material = SubResource( 1 )
 [node name="RayCast" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0 )
 enabled = true
+collision_mask = 524288
 collide_with_areas = true
 
 [node name="ImmediateGeometry" type="ImmediateGeometry" parent="."]

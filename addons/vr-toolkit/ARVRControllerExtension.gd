@@ -7,6 +7,7 @@ export (float) var floor_threshold = 0.9
 onready var world_scale = ARVRServer.world_scale
 onready var controller = get_parent()
 onready var origin = get_node(_origin_path)
+onready var camera = origin.get_node("ARVRCamera")
 onready var world = get_viewport().find_world()
 onready var state = world.get_direct_space_state()
 

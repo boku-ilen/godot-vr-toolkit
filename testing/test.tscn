@@ -88,15 +88,8 @@ render_direct_to_screen = true
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.85211, -5.13991 )
 viewport_element = ExtResource( 4 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.445556, 0 )
-
-[node name="ARVRCamera" parent="Player/ARVROrigin" index="0"]
-far = 1558.0
-
-[node name="RayTeleport" parent="Player/ARVROrigin/OVRController2" index="1"]
-min_pitch = -90.0
-max_distance = 5000.0
+[node name="PlayerVR" parent="." instance=ExtResource( 1 )]
+vr_menu = ExtResource( 4 )
 
 [node name="Compass" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00404, -1.5636 )
@@ -111,4 +104,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8739, -0.83972 )
 
 [editable path="GuiToMesh2"]
 
-[editable path="Player"]
+[editable path="PlayerVR"]

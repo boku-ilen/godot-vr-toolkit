@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends VRGuiElement
 
 
 onready var button = get_node("Button")

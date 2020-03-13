@@ -17,12 +17,14 @@ far = 647.1
 [node name="OVRController" parent="ARVROrigin" instance=ExtResource( 4 )]
 
 [node name="ObjectInteraction" parent="ARVROrigin/OVRController" instance=ExtResource( 1 )]
-_origin_path = NodePath("../../../../PlayerVR/ARVROrigin")
 
 [node name="GuiInteraction" parent="ARVROrigin/OVRController" instance=ExtResource( 3 )]
-_origin_path = NodePath("../../../../PlayerVR/ARVROrigin")
+_origin_path = NodePath("../..")
 
 [node name="OVRController2" parent="ARVROrigin" instance=ExtResource( 4 )]
 controller_id = 2
 
 [node name="RayTeleport" parent="ARVROrigin/OVRController2" instance=ExtResource( 2 )]
+
+[node name="ARVRControllerExtension" parent="ARVROrigin/OVRController2" instance=ExtResource( 3 )]
+_origin_path = NodePath("../..")
