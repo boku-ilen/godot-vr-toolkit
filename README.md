@@ -12,18 +12,33 @@ Big shout outs to the creators/projects:
 
 ## Install and Usage
 
+* Download the addons folder and include it in your project. Note that you also need the ``godot-openvr``-directory. All credits go to Bastiaan Olij.
+* Additionally if you want to use anything of the sample scene, also copy the scripts/scenes you wish to use.
+* Go to ``Project > Project Settings... > Autoload`` and search for the script ``res://addons/vr-toolkit/GlobalVRAccess.gd``. This creates a singleton which can be accessed from anywhere in the code, I sadly could not find a workaround for some features.
+* Go to ``Project > Project Settings... > Plugins`` and set the ``ARVRControllerExtension`` to active.
+* Also make sure that in ``Project > Project Settings... > GDNative`` godot_openvr is enabled.
+
 https://docs.godotengine.org/en/stable/tutorials/plugins/editor/installing_plugins.html
 
 ## Features
 
 * VR-Locomotion using a efficent way for intuitive teleportation
 * Object-Interaction System
-  * A superclass that is base on a rigidbody and can be extended
-  * A compass, a simple ball, aswell as a pew-pew-gun system are currently implemented to show the usage of this system
+  * A superclass that is base on a rigidbody and can be extended, like described in the tutorial of https://github.com/GodotVR/godot_openvr_fps
+  * A compass, a simple ball, aswell as a pew-pew-gun system are currently implemented to show the usage of this system, more will follow
   * It is possible to throw the objects in the direction of the controller-motion
 * Easily render a viewport on a plane (in the future probably also more complex shape) so you can create user interfaces
   * This includes rendering of UI-Scenes aswell as cameras
   * The project has two testing scenes for this (UI and a camera)
 * VR-Controller UI Interaction
   * Like in common VR-projects and menus, a RayCast is sent from the controller which collides with a viewport on a mesh
+  * With a faked ``InputEventMouse`` interaction with those viewports can be "faked": [InputEventMouse](https://docs.godotengine.org/en/stable/classes/class_inputeventmouse.html)
+  * Vibration in the controller on hovering UI-elements
 
+## Notes
+
+Please note that (sadly) i do not have tested these scripts / behaviours on any other devices than the Rift Oculus. I will be able to test on the Valve Index soon, keep in contact if anything does not properly work on other devices.
+
+## Contributing
+
+Help is greatly appreciated! You can check out known [issues](https://github.com/boku-ilen/godot-vr-toolkit/issues) or submit new functionality.
