@@ -3,6 +3,7 @@ extends MeshInstance
 
 export(PackedScene) var viewport_element
 export(bool) var create_collision_areas = false
+export(Vector2) var manual_mesh_size
 
 onready var viewport = get_node("Viewport")
 onready var area = get_node("Area")
@@ -18,7 +19,7 @@ func _ready():
 	if self.mesh.has_method("get_size"):
 		quad_mesh_size = mesh.size
 	else:
-		quad_mesh_size = Vector2(2, 2)
+		quad_mesh_size = manual_mesh_size
 	
 	viewport_texture = viewport_element.instance()
 	viewport.add_child(viewport_texture)
