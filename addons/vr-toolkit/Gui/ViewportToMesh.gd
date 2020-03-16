@@ -6,15 +6,20 @@ export(bool) var create_collision_areas = false
 
 onready var viewport = get_node("Viewport")
 onready var area = get_node("Area")
-# The size of the quad mesh itself.
-onready var quad_mesh_size = mesh.size
 
+# The size of the quad mesh itself.
+var quad_mesh_size 
 var viewport_texture
 var material = SpatialMaterial.new()
 var last_pos2D
 
 
 func _ready():
+	if self.mesh.has_method("get_size"):
+		quad_mesh_size = mesh.size
+	else:
+		quad_mesh_size = Vector2(2, 2)
+	
 	viewport_texture = viewport_element.instance()
 	viewport.add_child(viewport_texture)
 	material.albedo_texture = viewport.get_texture()
