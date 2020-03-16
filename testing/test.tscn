@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://testing/PlayerVR.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/vr-toolkit/Gui/GuiToMesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/vr-toolkit/Gui/CamToMesh.tscn" type="PackedScene" id=3]
 [ext_resource path="res://testing/ViewportToMesh/UiTest.tscn" type="PackedScene" id=4]
 [ext_resource path="res://testing/InteractableObjects/Ball/Ball.tscn" type="PackedScene" id=5]
-[ext_resource path="res://testing/ViewportToMesh/CameraTest.tscn" type="PackedScene" id=6]
 [ext_resource path="res://testing/InteractableObjects/PewPew/PewPew.tscn" type="PackedScene" id=7]
 [ext_resource path="res://testing/InteractableObjects/OrientationCompass/Compass.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/vr-toolkit/Gui/GuiToCurved.tscn" type="PackedScene" id=9]
+[ext_resource path="res://testing/ViewportToMesh/CameraTest.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -78,7 +79,7 @@ transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.418256, 0 )
 shape = SubResource( 2 )
 
 [node name="CamToMesh" parent="." instance=ExtResource( 3 )]
-viewport_element = ExtResource( 6 )
+viewport_element = ExtResource( 10 )
 
 [node name="Viewport" parent="CamToMesh" index="0"]
 hdr = true
@@ -99,6 +100,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66576, 1.0027, 0 )
 
 [node name="PewPew" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8739, -0.83972 )
+
+[node name="GuiToMesh3" parent="." instance=ExtResource( 9 )]
+transform = Transform( 0.627297, 0.77878, -3.40415e-08, 0, -4.37114e-08, -1, -0.77878, 0.627297, -2.742e-08, -5.34299, 1.84127, -5.881 )
+viewport_element = ExtResource( 4 )
 
 [editable path="CamToMesh"]
 

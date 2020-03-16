@@ -6,6 +6,7 @@
 margin_right = 424.0
 margin_bottom = 424.0
 rect_min_size = Vector2( 424, 424 )
+rect_pivot_offset = Vector2( 212, 212 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

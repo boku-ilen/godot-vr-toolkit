@@ -49,8 +49,9 @@ func cleanup():
 
 
 func init_menu():
-	var vr_menu_mesh = preload("res://addons/vr-toolkit/Gui/GuiToMesh.tscn").instance()
+	var vr_menu_mesh = preload("res://addons/vr-toolkit/Gui/GuiToCurved.tscn").instance()
 	vr_menu_mesh.viewport_element = vr_menu
+	vr_menu_mesh.rotation_degrees.x = 90
 	vr_menu_mesh.visible = false
 	add_child(vr_menu_mesh)
 	GlobalVRAccess.vr_menus.append(vr_menu_mesh)

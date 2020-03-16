@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "RigidBody",
 "class": "InteractableObject",
 "language": "GDScript",
-"path": "res://addons/vr-toolkit/InteractableObject.gd"
+"path": "res://addons/vr-toolkit/Objects/InteractableObject.gd"
 }, {
 "base": "Control",
 "class": "VRGuiElement",
