@@ -41,9 +41,9 @@ func _process(delta):
 			# distance from the start point colliding point and with it we multiply forward
 			var colliding_distance = global_transform.origin.distance_to(interact_ray.get_collision_point())
 			draw_line(translation, direction.normalized() * colliding_distance)
-			if interact_ray.get_collider().is_in_group("VRGui"):
-				# Call the function which managed the input on the viewport in ViewportToMesh.gd
-				interact_ray.get_collider().get_parent().ray_interaction_input(interact_ray.get_collision_point(), InputEventMouseMotion, controller.controller_id)
+			# Call the function which managed the input on the viewport in ViewportToMesh.gd
+			interact_ray.get_collider().get_parent().ray_interaction_input(
+				interact_ray.get_collision_point(), InputEventMouseMotion, controller.controller_id)
 		else:
 			# Not colliding -> no point and longer ray
 			point_visualizer.set_visible(false)
@@ -65,15 +65,19 @@ func on_button_pressed(id: int):
 		toggle_menu()
 	elif enabled:
 		if id == interact_id:
-			if not interact_ray.get_collider() == null and interact_ray.get_collider().is_in_group("VRGui"):
-				interact_ray.get_collider().get_parent().ray_interaction_input(interact_ray.get_collision_point(), InputEventMouseButton, controller.controller_id, true)
+			if not interact_ray.get_collider() == null:
+				# Call the function which managed the input on the viewport in ViewportToMesh.gd
+				interact_ray.get_collider().get_parent().ray_interaction_input(
+					interact_ray.get_collision_point(), InputEventMouseButton, controller.controller_id, true)
 
 
 func on_button_released(id: int):
 	if enabled:
 		if id == interact_id:
-			if not interact_ray.get_collider() == null and interact_ray.get_collider().is_in_group("VRGui"):
-				interact_ray.get_collider().get_parent().ray_interaction_input(interact_ray.get_collision_point(), InputEventMouseButton, controller.controller_id, false)
+			if not interact_ray.get_collider() == null:
+				# Call the function which managed the input on the viewport in ViewportToMesh.gd
+				interact_ray.get_collider().get_parent().ray_interaction_input(
+					interact_ray.get_collision_point(), InputEventMouseButton, controller.controller_id, false)
 
 
 func toggle_menu():
@@ -85,5 +89,7 @@ func toggle_menu():
 			menu.global_transform.origin = camera.global_transform.origin + -(camera.global_transform.basis.z) + offset
 			offset += offset + Vector3.RIGHT
 		else:
+			# Set the visibility to false and disable the collision-shape so the
+			# ray does not interact with an invisble object
 			menu.visible = false
 			menu.get_node("Area/CollisionShape").disabled = true
