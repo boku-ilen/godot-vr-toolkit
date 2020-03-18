@@ -23,10 +23,14 @@ https://docs.godotengine.org/en/stable/tutorials/plugins/editor/installing_plugi
 ## Features
 
 * VR-Locomotion using a efficent way for intuitive teleportation
+
+![RayTeleport](https://user-images.githubusercontent.com/33001106/76965131-15944880-6924-11ea-970f-447f7383ea2a.png)
 * Object-Interaction System
   * A superclass that is base on a rigidbody and can be extended, like described in the tutorial of https://github.com/GodotVR/godot_openvr_fps
   * A compass, a simple ball, aswell as a pew-pew-gun system are currently implemented to show the usage of this system, more will follow
   * It is possible to throw the objects in the direction of the controller-motion
+  
+![ObjectInteraction](https://user-images.githubusercontent.com/33001106/76965660-f9dd7200-6924-11ea-987f-3a866dc73beb.png)
 * Easily render a viewport on a plane (in the future probably also more complex shape) so you can create user interfaces
   * This includes rendering of UI-Scenes aswell as cameras
   * The project has two testing scenes for this (UI and a camera)
@@ -34,6 +38,8 @@ https://docs.godotengine.org/en/stable/tutorials/plugins/editor/installing_plugi
   * Like in common VR-projects and menus, a RayCast is sent from the controller which collides with a viewport on a mesh
   * With a faked ``InputEventMouse`` interaction with those viewports can be "faked": [InputEventMouse](https://docs.godotengine.org/en/stable/classes/class_inputeventmouse.html)
   * Vibration in the controller on hovering UI-elements
+  
+![GuiInteraction](https://user-images.githubusercontent.com/33001106/76964827-9d2d8780-6923-11ea-9d8b-434124320fa8.png)
   
 For more in depth explanation of nodes, scripts and general functionalities check out the [Wiki](https://github.com/boku-ilen/godot-vr-toolkit/wiki).
 
