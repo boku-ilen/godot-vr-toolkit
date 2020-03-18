@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/CurvedPlane.glb-8df92d751ac76ec93918b50421065f34.scn"
+path="res://.import/CurvedPlane.glb-89eea0f140fead0879b2ff98a0594d9a.scn"
 
 [deps]
 
-source_file="res://Resources/CurvedPlane.glb"
-dest_files=[ "res://.import/CurvedPlane.glb-8df92d751ac76ec93918b50421065f34.scn" ]
+source_file="res://addons/vr-toolkit/Resources/CurvedPlane.glb"
+dest_files=[ "res://.import/CurvedPlane.glb-89eea0f140fead0879b2ff98a0594d9a.scn" ]
 
 [params]
 
