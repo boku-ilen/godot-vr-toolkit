@@ -34,6 +34,8 @@ https://docs.godotengine.org/en/stable/tutorials/plugins/editor/installing_plugi
   * Like in common VR-projects and menus, a RayCast is sent from the controller which collides with a viewport on a mesh
   * With a faked ``InputEventMouse`` interaction with those viewports can be "faked": [InputEventMouse](https://docs.godotengine.org/en/stable/classes/class_inputeventmouse.html)
   * Vibration in the controller on hovering UI-elements
+  
+For more in depth explanation of nodes, scripts and general functionalities check out the [Wiki](https://github.com/boku-ilen/godot-vr-toolkit/wiki).
 
 ## Notes
 
@@ -41,4 +43,4 @@ Please note that (sadly) i do not have tested these scripts / behaviours on any 
 
 ## Contributing
 
-Help is greatly appreciated! You can check out known [issues](https://github.com/boku-ilen/godot-vr-toolkit/issues) or submit new functionality.
+Help is greatly appreciated! You can check out known [issues](https://github.com/boku-ilen/godot-vr-toolkit/issues) or submit new functionality and bugs/errors, as well as enhancements.
