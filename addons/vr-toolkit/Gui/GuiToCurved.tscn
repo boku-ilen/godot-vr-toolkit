@@ -34,9 +34,7 @@ points = PoolVector3Array( 0, 0.00565414, -1.00565, 0, 0.00565414, 1.00565, 0.33
 [sub_resource type="ConvexPolygonShape" id=7]
 points = PoolVector3Array( -0.677966, 0.0282486, -1.00565, -0.677966, 0.0282486, 1.00565, -0.553602, 0.00565193, -1.00565, -0.553602, 0.00565193, 1.00565, -0.54232, 0.0282486, -1.00565, -0.54232, 0.0282486, 1.00565, -0.327768, -0.00564972, -1.00565, -0.327768, -0.00564972, 1.00565, 0, 0.00565193, -1.00565, 0, 0.00565193, 1.00565 )
 
-[node name="GuiToCurved" type="MeshInstance" groups=[
-"VRGui",
-]]
+[node name="GuiToCurved" type="MeshInstance"]
 mesh = SubResource( 1 )
 material/0 = null
 script = ExtResource( 1 )

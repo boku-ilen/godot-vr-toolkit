@@ -1,6 +1,7 @@
 extends "res://addons/vr-toolkit/ARVRControllerExtension.gd"
 
-
+# https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#enum-globalscope-joysticklist
+export(int) var teleport_id = 1
 export(float) var min_pitch = -80
 export(float) var max_pitch = 130
 export(float) var max_distance = 500
@@ -39,8 +40,7 @@ func _init_bezier():
 
 
 func on_button_pressed(id):
-	# 1 equals Y on rift
-	if id == 1:
+	if id == teleport_id:
 		if tall_ray.is_colliding():
 			origin.translation = tall_ray.get_collision_point()
 

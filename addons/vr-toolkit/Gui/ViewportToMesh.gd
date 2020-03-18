@@ -7,10 +7,10 @@ export(Vector2) var manual_mesh_size
 
 onready var viewport = get_node("Viewport")
 onready var area = get_node("Area")
+onready var viewport_texture = viewport_element.instance()
 
 # The size of the quad mesh itself.
 var quad_mesh_size 
-var viewport_texture
 var material = SpatialMaterial.new()
 var last_pos2D
 
@@ -21,7 +21,6 @@ func _ready():
 	else:
 		quad_mesh_size = manual_mesh_size
 	
-	viewport_texture = viewport_element.instance()
 	viewport.add_child(viewport_texture)
 	material.albedo_texture = viewport.get_texture()
 	material.flags_unshaded = true
@@ -30,9 +29,10 @@ func _ready():
 
 
 func ray_interaction_input(position3D: Vector3, event_type, device_id, pressed=null):
-	
+	# The position3D will be transformed affinly so it is  the actual values for the viewport and not those in the world.
 	position3D = area.global_transform.affine_inverse() * position3D
-	
+	# And then changed to a 2D-Vector that is on the area of the collision shape
+	# As the instance is rotated by 90 degrees it will be x and z axis
 	var position2D = Vector2(position3D.x, position3D.z)
 	
 	# Right now the event position's range is the following: (-quad_size/2) -> (quad_size/2)
