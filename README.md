@@ -30,7 +30,7 @@ https://docs.godotengine.org/en/stable/tutorials/plugins/editor/installing_plugi
   * A compass, a simple ball, aswell as a pew-pew-gun system are currently implemented to show the usage of this system, more will follow
   * It is possible to throw the objects in the direction of the controller-motion
   
-![ObjectInteraction](https://user-images.githubusercontent.com/33001106/76965660-f9dd7200-6924-11ea-987f-3a866dc73beb.png)
+![ObjectInteraction](https://user-images.githubusercontent.com/33001106/76966569-77ee4880-6926-11ea-973c-1c45087b002e.png)
 * Easily render a viewport on a plane (in the future probably also more complex shape) so you can create user interfaces
   * This includes rendering of UI-Scenes aswell as cameras
   * The project has two testing scenes for this (UI and a camera)
