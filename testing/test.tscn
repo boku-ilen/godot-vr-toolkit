@@ -98,6 +98,9 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.85
 mesh = SubResource( 3 )
 viewport_element = ExtResource( 4 )
 
+[node name="Viewport" parent="GuiToMesh2" index="0"]
+size = Vector2( 464, 464 )
+
 [node name="PlayerVR" parent="." instance=ExtResource( 1 )]
 vr_menu = ExtResource( 4 )
 

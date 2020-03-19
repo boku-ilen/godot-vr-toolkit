@@ -21,6 +21,10 @@ func _ready():
 	else:
 		quad_mesh_size = manual_mesh_size
 	
+	# So the viewport size does not have to be set manually
+	if viewport_texture.has_method("get_rect"):
+		viewport.size = viewport_texture.rect_size
+	
 	viewport.add_child(viewport_texture)
 	material.albedo_texture = viewport.get_texture()
 	material.flags_unshaded = true
