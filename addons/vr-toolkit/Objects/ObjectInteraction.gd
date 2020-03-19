@@ -6,13 +6,20 @@ export(int) var interact_id = 15
 
 onready var area = get_node("Area")
 
+# The picked up object
 var current_object: InteractableObject = null
+# The initial transform of the object when picking up
+var original_object_transform: Transform = Transform.IDENTITY
 
 
 func _process(delta):
 	# If we are currently holding an object we will translate it with the controller
 	if current_object:
-		current_object.global_transform = global_transform
+		current_object.global_transform.origin = global_transform.origin
+		# Apply the rotation since the object has been picked up
+		current_object.global_transform.basis = global_transform.basis * original_object_transform.basis
+		# Prevent floating point inaccuracy 
+		current_object.global_transform = current_object.global_transform.orthonormalized()
 
 
 func on_button_released(id: int):
@@ -29,6 +36,14 @@ func on_button_pressed(id: int):
 	# set our current_object to this object
 	if id == pick_up_id:
 		current_object = _try_pick_up_interactable()
+		if not current_object == null:
+			# Save the transform of the object when it was taken, we need this 
+			# to accurately compute the transform with the rotation of the controller
+			original_object_transform = current_object.global_transform
+			# Reset the basis of global_transform to Identity so only the rotation
+			# from the moment it has been picked up will be applied, not the rotation
+			# that the controller already has when picking up
+			global_transform.basis = Basis.IDENTITY
 	# To prevent errors we will first check if the current object is set and then 
 	# call for its interact method
 	elif id == interact_id:
