@@ -1,8 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://addons/vr-toolkit/Resources/compass.png" type="Texture" id=1]
+[ext_resource path="res://addons/vr-toolkit/Resources/compass.svg" type="Texture" id=1]
 [ext_resource path="res://testing/InteractableObjects/OrientationCompass/Compass.gd" type="Script" id=2]
-
 
 [sub_resource type="CylinderMesh" id=1]
 top_radius = 0.12

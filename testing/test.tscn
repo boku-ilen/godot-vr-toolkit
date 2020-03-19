@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://testing/PlayerVR.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/vr-toolkit/Gui/GuiToMesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/vr-toolkit/Gui/CamToMesh.tscn" type="PackedScene" id=3]
 [ext_resource path="res://testing/ViewportToMesh/UiTest.tscn" type="PackedScene" id=4]
 [ext_resource path="res://testing/InteractableObjects/Ball/Ball.tscn" type="PackedScene" id=5]
+[ext_resource path="res://testing/InteractableObjects/GuiObject/Map.tscn" type="PackedScene" id=6]
 [ext_resource path="res://testing/InteractableObjects/PewPew/PewPew.tscn" type="PackedScene" id=7]
 [ext_resource path="res://testing/InteractableObjects/OrientationCompass/Compass.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/vr-toolkit/Gui/GuiToCurved.tscn" type="PackedScene" id=9]
@@ -14,6 +15,9 @@
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 5.02755, 1, 4.93471 )
+
+[sub_resource type="PlaneMesh" id=3]
+resource_local_to_scene = true
 
 [node name="Viewport" type="Spatial"]
 
@@ -78,6 +82,10 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.418256, 0 )
 shape = SubResource( 2 )
 
+[node name="GuiToCurved" parent="." instance=ExtResource( 9 )]
+transform = Transform( 0.869667, 0.493638, -2.15776e-08, 0, -4.37114e-08, -1, -0.493638, 0.869667, -3.80144e-08, -4.28138, 1.8061, -5.5926 )
+viewport_element = ExtResource( 4 )
+
 [node name="CamToMesh" parent="." instance=ExtResource( 3 )]
 viewport_element = ExtResource( 10 )
 
@@ -87,10 +95,14 @@ render_direct_to_screen = true
 
 [node name="GuiToMesh2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.85211, -5.13991 )
+mesh = SubResource( 3 )
 viewport_element = ExtResource( 4 )
 
 [node name="PlayerVR" parent="." instance=ExtResource( 1 )]
 vr_menu = ExtResource( 4 )
+
+[node name="ARVRControllerExtension" parent="PlayerVR/ARVROrigin/OVRController2" index="2"]
+enabled = false
 
 [node name="Compass" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00404, -1.5636 )
@@ -101,9 +113,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66576, 1.0027, 0 )
 [node name="PewPew" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8739, -0.83972 )
 
-[node name="GuiToMesh3" parent="." instance=ExtResource( 9 )]
-transform = Transform( 0.627297, 0.77878, -3.40415e-08, 0, -4.37114e-08, -1, -0.77878, 0.627297, -2.742e-08, -5.34299, 1.84127, -5.881 )
-viewport_element = ExtResource( 4 )
+[node name="Spatial2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.806094, 0.591788, 0, -0.591788, 0.806094, 0.568637, 1.15292, -2.09512 )
 
 [editable path="CamToMesh"]
 
