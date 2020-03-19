@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/compass.png-05d9e2a78310a72d18f272e25058e8d1.s3tc.stex"
-path.etc2="res://.import/compass.png-05d9e2a78310a72d18f272e25058e8d1.etc2.stex"
+path.s3tc="res://.import/compass.svg-d071bb79f09c64c005f41d87b4652146.s3tc.stex"
+path.etc2="res://.import/compass.svg-d071bb79f09c64c005f41d87b4652146.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/vr-toolkit/Resources/compass.png"
-dest_files=[ "res://.import/compass.png-05d9e2a78310a72d18f272e25058e8d1.s3tc.stex", "res://.import/compass.png-05d9e2a78310a72d18f272e25058e8d1.etc2.stex" ]
+source_file="res://addons/vr-toolkit/Resources/compass.svg"
+dest_files=[ "res://.import/compass.svg-d071bb79f09c64c005f41d87b4652146.s3tc.stex", "res://.import/compass.svg-d071bb79f09c64c005f41d87b4652146.etc2.stex" ]
 
 [params]
 
