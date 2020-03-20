@@ -37,6 +37,9 @@ func on_button_pressed(id: int):
 	if id == pick_up_id:
 		current_object = _try_pick_up_interactable()
 		if not current_object == null:
+			# As sometimes it is practicable to set the rigidbodies to sleeping
+			# so they stay in position, disable this now.
+			current_object.set_sleeping(false)
 			# Save the transform of the object when it was taken, we need this 
 			# to accurately compute the transform with the rotation of the controller
 			original_object_transform = current_object.global_transform
@@ -54,5 +57,5 @@ func on_button_pressed(id: int):
 func _try_pick_up_interactable():
 	for body in area.get_overlapping_bodies():
 		if body.is_in_group("Interactable"):
-			body.picked_up(controller)
+			body.picked_up(controller, self)
 			return body

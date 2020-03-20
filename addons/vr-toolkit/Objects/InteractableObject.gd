@@ -2,6 +2,7 @@ extends RigidBody
 class_name  InteractableObject
 
 var controller: ARVRController
+var object_interaction
 var _is_picked_up: bool = false
 
 
@@ -17,8 +18,9 @@ func interact():
 
 
 # This happens when the pick-up-button is pressed on the current controller
-func picked_up(my_controller: ARVRController):
+func picked_up(my_controller: ARVRController, my_interactor):
 	controller =  my_controller
+	object_interaction = my_interactor
 	_is_picked_up = true
 
 

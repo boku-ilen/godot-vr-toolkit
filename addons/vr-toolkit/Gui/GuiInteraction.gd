@@ -62,7 +62,7 @@ func draw_line(var begin: Vector3, var end: Vector3):
 
 func on_button_pressed(id: int):
 	if id == menu_id:
-		toggle_menu()
+		toggle_objects()
 	elif enabled:
 		if id == interact_id:
 			if not interact_ray.get_collider() == null:
@@ -93,3 +93,11 @@ func toggle_menu():
 			# ray does not interact with an invisble object
 			menu.visible = false
 			menu.get_node("Area/CollisionShape").disabled = true
+
+
+func toggle_objects():
+	if not GlobalVRAccess.object_menu.visible:
+		GlobalVRAccess.object_menu.visible = true
+		GlobalVRAccess.object_menu.global_transform.origin = camera.global_transform.origin + -(camera.global_transform.basis.z)
+	
+	GlobalVRAccess.object_menu.position_objects()
