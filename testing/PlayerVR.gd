@@ -6,6 +6,7 @@ extends Spatial
 #
 
 export(PackedScene) var vr_menu
+export(PackedScene) var objects_menu
 
 onready var controller1 = get_node("ARVROrigin/OVRController")
 onready var controller2 = get_node("ARVROrigin/OVRController2")
@@ -37,7 +38,8 @@ func _ready():
 		get_viewport().keep_3d_linear = true  # OpenVR handles sRGB conversion for us
 		get_viewport().msaa = get_viewport().MSAA_2X  # The VR display needs good anti-aliasing
 		
-		init_menu()
+		init_vr_menu()
+		init_object_menu()
 
 
 func cleanup():
@@ -48,10 +50,17 @@ func cleanup():
 	get_viewport().set_size_override(false)
 
 
-func init_menu():
+func init_vr_menu():
 	var vr_menu_mesh = preload("res://addons/vr-toolkit/Gui/GuiToCurved.tscn").instance()
 	vr_menu_mesh.viewport_element = vr_menu
 	vr_menu_mesh.rotation_degrees.x = 90
 	vr_menu_mesh.visible = false
 	add_child(vr_menu_mesh)
 	GlobalVRAccess.vr_menus.append(vr_menu_mesh)
+
+
+func init_object_menu():
+	var instance = objects_menu.instance()
+	GlobalVRAccess.object_menu = instance
+	instance.visible = false
+	add_child(instance)
