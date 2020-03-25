@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://testing/PlayerVR.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/vr-toolkit/Gui/GuiToMesh.tscn" type="PackedScene" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://testing/InteractableObjects/Compass/Compass.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/vr-toolkit/Gui/GuiToCurved.tscn" type="PackedScene" id=9]
 [ext_resource path="res://testing/ViewportToMesh/CameraTest.tscn" type="PackedScene" id=10]
-[ext_resource path="res://testing/InteractableObjects/Menu/SpawnObjects.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -103,11 +102,7 @@ viewport_element = ExtResource( 4 )
 size = Vector2( 464, 464 )
 
 [node name="PlayerVR" parent="." instance=ExtResource( 1 )]
-vr_menu = ExtResource( 4 )
-objects_menu = ExtResource( 11 )
-
-[node name="ARVRControllerExtension" parent="PlayerVR/ARVROrigin/OVRController2" index="2"]
-enabled = false
+default_action_set = "/actions/godot_ingame"
 
 [node name="Compass" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00404, -1.5636 )

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://testing/InteractableObjects/Menu/ObjectButton.gd" type="Script" id=1]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Viewport")
+
+[node name="Button" type="TextureButton"]
+margin_right = 1200.0
+margin_bottom = 1200.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 150, 150 )
+own_world = true
+hdr = false
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="Viewport"]
+current = true
+fov = 26.0379
+near = 0.13
+far = 15.5
