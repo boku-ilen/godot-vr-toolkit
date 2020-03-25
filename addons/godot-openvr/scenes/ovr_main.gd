@@ -6,17 +6,18 @@ extends ARVROrigin
 # You can specify your own custom action file here.
 # Note that you can take out all default actions if you wish to use your own but
 # features such as ARVRController.get_joystick_axis and ARVRController.is_button_pressed won't work.
-export (String) var action_json_path = "res://addons/godot-openvr/actions/actions-toolkit.json"
+export(String, FILE, "*.json") var action_json_path = "res://addons/godot-openvr/actions/actions.json"
 
 # The plugin always registers atleast one action set.
 # If you have renamed this action set you can specify the name here
-export (String) var default_action_set = "/actions/vr-toolkit-godot"
+export (String) var default_action_set = "/actions/godot_ingame"
 
 # If we render to a custom viewport give our node path here.
 export (NodePath) var viewport = null
 
 var arvr_interface : ARVRInterface = null
 var OpenVRConfig = null
+
 
 func _ready():
 	# Load our config before we initialise
