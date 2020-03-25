@@ -1,58 +1,58 @@
 {
   "action_set": [
     {
-      "name": "/actions/vr-toolkit-godot",
+      "name": "/actions/godot_ingame",
       "usage": "leftright"
     }
   ],
   "actions": [
     {
-      "name": "/actions/vr-toolkit-godot/ingame/trigger",
+      "name": "/actions/godot_ingame/in/trigger",
       "requirement": "mandatory",
       "type": "boolean"
     },
     {
-			"name" : "/actions/vr-toolkit-godot/ingame/grip",
+			"name" : "/actions/godot_ingame/in/grip",
 			"requirement" : "mandatory",
 			"type" : "boolean"
 		},
     {
-			"name" : "/actions/godot/in/button_ax",
+			"name" : "/actions/godot_ingame/in/button_ax",
 			"requirement" : "mandatory",
 			"type" : "boolean"
 		},
 		{
-			"name" : "/actions/godot/in/button_by",
+			"name" : "/actions/godot_ingame/in/button_by",
 			"requirement" : "mandatory",
 			"type" : "boolean"
 		},
     {
-			"name" : "/actions/vr-toolkit-godot/ingame/analog_trigger",
+			"name" : "/actions/godot_ingame/in/analog_trigger",
 			"requirement" : "suggested",
 			"type" : "vector1"
 		},
     {
-      "name" : "/actions/vr-toolkit-godot/ingame/analog_grip",
+      "name" : "/actions/godot_ingame/in/analog_grip",
       "requirement" : "suggested",
       "type" : "vector1"
     },
     {
-			"name" : "/actions/vr-toolkit-godot/ingame/pose/forward",
+			"name" : "/actions/godot_ingame/in/forward",
 			"requirement" : "mandatory",
 			"type" : "pose"
 		},
     {
-			"name" : "/actions/vr-toolkit-godot/ingame/pose/backward",
+			"name" : "/actions/godot_ingame/in/backward",
 			"requirement" : "mandatory",
 			"type" : "pose"
 		},
     {
-			"name" : "/actions/vr-toolkit-godot/ingame/pose/base",
+			"name" : "/actions/godot_ingame/in/base",
 			"requirement" : "mandatory",
 			"type" : "pose"
 		},
     {
-			"name" : "/actions/vr-toolkit-godot/ingame/pose/side",
+			"name" : "/actions/godot_ingame/in/side",
 			"requirement" : "mandatory",
 			"type" : "pose"
 		}
@@ -85,19 +85,18 @@
 	],
 	"localization" : [
 		{
-			"/actions/vr-toolkit-godot" : "Godot vr-toolkit actions",
-			"/actions/vr-toolkit-godot/ingame" : "Standard ingame",
-      "/actions/vr-toolkit-godot/ingame/pose": "Ingame pose"
-			"/actions/vr-toolkit-godot/ingame/trigger" : "Trigger",
-      "/actions/vr-toolkit-godot/ingame/grip": "Grip",
-      "/actions/godot/in/button_ax": "A or X button",
-      "/actions/godot/in/button_by": "B or Y button",
-      "/actions/vr-toolkit-godot/ingame/analog_trigger": "Analog Trigger (0.0 - 1.0)",
-      "/actions/vr-toolkit-godot/ingame/analog_grip": "Analog Grip (0.0 - 1.0)",
-      "/actions/vr-toolkit-godot/ingame/pose/forward": "forward",
-      "/actions/vr-toolkit-godot/ingame/pose/backward": "backward",
-      "/actions/vr-toolkit-godot/ingame/pose/base": "base",
-      "/actions/vr-toolkit-godot/ingame/pose/side": "side",
+			"/actions/godot_ingame" : "Godot vr-toolkit actions",
+      "/actions/godot_ingame/in/pose": "Ingame pose",
+      "/actions/godot_ingame/in/trigger" : "Trigger",
+      "/actions/godot_ingame/in/grip": "Grip",
+      "/actions/godot_ingame/in/button_ax": "A or X button",
+      "/actions/godot_ingame/in/button_by": "B or Y button",
+      "/actions/godot_ingame/in/analog_trigger": "Analog Trigger (0.0 - 1.0)",
+      "/actions/godot_ingame/in/analog_grip": "Analog Grip (0.0 - 1.0)",
+      "/actions/godot_ingame/in/forward": "Forward of Controller",
+      "/actions/godot_ingame/in/backward": "Backward of Controller",
+      "/actions/godot_ingame/in/base": "Base of Controller",
+      "/actions/godot_ingame/in/side": "Side of Controller",
 			"language_tag" : "en_US"
 		}
 	]
