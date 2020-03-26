@@ -37,51 +37,33 @@
       "type" : "vector1"
     },
     {
-			"name" : "/actions/godot_ingame/in/forward",
-			"requirement" : "mandatory",
-			"type" : "pose"
+			"name": "/actions/godot/in/raw_pose",
+			"requirement" : "suggested",
+			"type": "pose"
+		},
+		{
+			"name": "/actions/godot/in/base_pose",
+			"requirement" : "suggested",
+			"type": "pose"
+		},
+		{
+			"name": "/actions/godot/in/grip_pose",
+			"requirement" : "suggested",
+			"type": "pose"
+		},
+		{
+			"name": "/actions/godot/in/tip_pose",
+			"requirement" : "suggested",
+			"type": "pose"
 		},
     {
-			"name" : "/actions/godot_ingame/in/backward",
-			"requirement" : "mandatory",
-			"type" : "pose"
-		},
-    {
-			"name" : "/actions/godot_ingame/in/base",
-			"requirement" : "mandatory",
-			"type" : "pose"
-		},
-    {
-			"name" : "/actions/godot_ingame/in/side",
-			"requirement" : "mandatory",
-			"type" : "pose"
-		}
+      "name": "/actions/godot/out/haptic",
+      "requirement" : "suggested",
+      "type": "vibration"
+    }
   ],
   "default_bindings" : [
-		{
-			"binding_url" : "bindings_index_controller.json",
-			"controller_type" : "knuckles"
-		},
-		{
-			"binding_url" : "bindings_oculus_touch.json",
-			"controller_type" : "oculus_touch"
-		},
-		{
-			"binding_url" : "bindings_vive_controller.json",
-			"controller_type" : "vive_controller"
-		},
-		{
-			"binding_url" : "bindings_holographic_controller.json",
-			"controller_type" : "holographic_controller"
-		},
-		{
-			"binding_url" : "bindings_generic.json",
-			"controller_type" : "generic"
-		},
-		{
-			"binding_url" : "bindings_gamepad.json",
-			"controller_type" : "gamepad"
-		}
+
 	],
 	"localization" : [
 		{
@@ -93,10 +75,11 @@
       "/actions/godot_ingame/in/button_by": "B or Y button",
       "/actions/godot_ingame/in/analog_trigger": "Analog Trigger (0.0 - 1.0)",
       "/actions/godot_ingame/in/analog_grip": "Analog Grip (0.0 - 1.0)",
-      "/actions/godot_ingame/in/forward": "Forward of Controller",
-      "/actions/godot_ingame/in/backward": "Backward of Controller",
-      "/actions/godot_ingame/in/base": "Base of Controller",
-      "/actions/godot_ingame/in/side": "Side of Controller",
+      "/actions/godot_ingame/in/grip_pose": "Where the grip position of the controller is",
+      "/actions/godot_ingame/in/tip_pose": "Where the controller is pointing to",
+      "/actions/godot_ingame/in/base_pose": "Base of controller",
+      "/actions/godot_ingame/in/raw_pose": "The raw pose describes an unspecific position above the controller",
+      "/actions/godot_ingame/out/haptic": "Vibration of the controller",
 			"language_tag" : "en_US"
 		}
 	]
