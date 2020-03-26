@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Spatial",
+"class": "ControllerTool",
+"language": "GDScript",
+"path": "res://addons/vr-toolkit/Controller/ControllerTool.gd"
+}, {
 "base": "RigidBody",
 "class": "InteractableObject",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://addons/vr-toolkit/Gui/GuiElement.gd"
 } ]
 _global_script_class_icons={
+"ControllerTool": "",
 "InteractableObject": "",
 "VRGuiElement": ""
 }
