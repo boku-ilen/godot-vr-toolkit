@@ -29,15 +29,10 @@ func picked_up(my_controller: int, my_interactor):
 # This happens when the pick-up-button is released on the current controller
 # Get the current position and wait two physics-frames (so it is not frame dependent)
 # then check for the position again. The direction will be the difference of those two positions
-func dropped():
+func dropped(velocity: Vector3):
 	if not object_interaction == null:
-		
-		var position_before = object_interaction.global_transform.origin
-		yield(get_tree(), "physics_frame")
-		var direction = object_interaction.global_transform.origin - position_before
-		apply_impulse(global_transform.origin, direction * 100)
-		
-		
+		set_linear_velocity(velocity)
+	
 	controller_id = 0
 	object_interaction = null
 	_is_picked_up = false

@@ -23,15 +23,17 @@ controller_side = 1
 [node name="Base" parent="Left" index="0"]
 on_hand = 2
 
-[node name="RayTeleport" parent="Left/Tip" index="0" instance=ExtResource( 7 )]
+[node name="ObjectInteraction" parent="Left/Raw" index="0" instance=ExtResource( 8 )]
 
-[node name="ObjectInteraction" parent="Left/Tip" index="1" instance=ExtResource( 8 )]
+[node name="RayTeleport" parent="Left/Tip" index="0" instance=ExtResource( 7 )]
 
 [node name="Right" parent="." instance=ExtResource( 2 )]
 controller_side = 2
 
 [node name="Raw" parent="Right" index="1"]
 on_hand = 2
+
+[node name="ObjectInteraction" parent="Right/Raw" index="0" instance=ExtResource( 8 )]
 
 [node name="Grip" parent="Right" index="2"]
 on_hand = 2
@@ -46,8 +48,6 @@ on_hand = 2
 
 [node name="MenuInput" parent="Right/Tip/GuiInteraction/Inputs" index="1"]
 on_hand = 2
-
-[node name="ObjectInteraction" parent="Right/Tip" index="1" instance=ExtResource( 8 )]
 
 [node name="LeftVisual" parent="." instance=ExtResource( 1 )]
 

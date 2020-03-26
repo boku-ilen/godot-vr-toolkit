@@ -18,6 +18,11 @@ func _ready():
 
 
 func _process(delta):
+	velocities.push_back((global_transform.origin - last_position) / delta)
+	if velocities.size() > 10:
+		velocities.pop_front()
+	
+	last_position = global_transform.origin
 	# If we are currently holding an object we will translate it with the controller
 	if current_object:
 		current_object.global_transform.origin = global_transform.origin
@@ -52,7 +57,7 @@ func on_pickup(pressed: bool):
 	# If we are no longer holding the object we will call for its dropped method 
 	# and set the current_object to null
 		if current_object:
-			current_object.dropped()
+			current_object.dropped(_get_velocity())
 			current_object = null
 
 
@@ -69,3 +74,16 @@ func _try_pick_up_closest_interactable():
 	
 	if not closest_body == null: closest_body.picked_up(controller_id, self)
 	return closest_body
+
+
+func _get_velocity():
+	var velocity = Vector3(0.0, 0.0, 0.0)
+	var count = velocities.size()
+	
+	if count > 0:
+		for v in velocities:
+			velocity = velocity + v
+		
+		velocity = velocity / count
+	
+	return velocity

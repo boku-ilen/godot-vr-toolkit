@@ -8,15 +8,15 @@ extends "res://addons/godot-openvr/scenes/ovr_main.gd"
 export(PackedScene) var vr_menu
 export(PackedScene) var objects_menu
 
-onready var controller_left = get_node("Left")
-onready var controller_right = get_node("Right")
+onready var controller_left = get_node("LeftVisual")
+onready var controller_right = get_node("RightVisual")
 
 var interface
 
 
 func _ready():
-	#GlobalVRAccess.controller_id_dict[controller_left.controller_id] = controller_left
-	pass#GlobalVRAccess.controller_id_dict[controller_right.controller_id] = controller_right
+	GlobalVRAccess.controller_id_dict[controller_left.controller_id] = controller_left
+	GlobalVRAccess.controller_id_dict[controller_right.controller_id] = controller_right
 
 
 func init_vr_menu():
