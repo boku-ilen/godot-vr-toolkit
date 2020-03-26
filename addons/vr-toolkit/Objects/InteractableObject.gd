@@ -1,7 +1,9 @@
 extends RigidBody
 class_name  InteractableObject
 
-var controller: ARVRController
+onready var original_parent = get_parent()
+
+var controller_id: int
 var object_interaction
 var _is_picked_up: bool = false
 
@@ -18,8 +20,8 @@ func interact():
 
 
 # This happens when the pick-up-button is pressed on the current controller
-func picked_up(my_controller: ARVRController, my_interactor):
-	controller =  my_controller
+func picked_up(my_controller: int, my_interactor):
+	controller_id =  my_controller
 	object_interaction = my_interactor
 	_is_picked_up = true
 
@@ -28,12 +30,14 @@ func picked_up(my_controller: ARVRController, my_interactor):
 # Get the current position and wait two physics-frames (so it is not frame dependent)
 # then check for the position again. The direction will be the difference of those two positions
 func dropped():
-	if not controller == null:
-		var position_before = controller.global_transform.origin
+	if not object_interaction == null:
+		
+		var position_before = object_interaction.global_transform.origin
 		yield(get_tree(), "physics_frame")
-		yield(get_tree(), "physics_frame")
-		var direction = controller.global_transform.origin - position_before
-		apply_impulse(transform.origin, direction * 100)
-		controller = null
-	
+		var direction = object_interaction.global_transform.origin - position_before
+		apply_impulse(global_transform.origin, direction * 100)
+		
+		
+	controller_id = 0
+	object_interaction = null
 	_is_picked_up = false

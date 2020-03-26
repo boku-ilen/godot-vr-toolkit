@@ -1,8 +1,5 @@
-extends "res://addons/vr-toolkit/ARVRControllerExtension.gd"
+extends "res://addons/vr-toolkit/Controller/ControllerTool.gd"
 
-# https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#enum-globalscope-joysticklist
-export(int) var pick_up_id = 2
-export(int) var interact_id = 15
 
 onready var area = get_node("Area")
 
@@ -10,6 +7,14 @@ onready var area = get_node("Area")
 var current_object: InteractableObject = null
 # The initial transform of the object when picking up
 var original_object_transform: Transform = Transform.IDENTITY
+var last_position = Vector3(0.0, 0.0, 0.0)
+var velocities = Array()
+
+
+func _ready():
+	$Inputs/PickUpInput.connect("pressed", self, "on_pickup", [true])
+	$Inputs/PickUpInput.connect("released", self, "on_pickup", [false])
+	$Inputs/InteractInput.connect("pressed", self, "on_interact")
 
 
 func _process(delta):
@@ -22,20 +27,16 @@ func _process(delta):
 		current_object.global_transform = current_object.global_transform.orthonormalized()
 
 
-func on_button_released(id: int):
-	# If we are no longer holding the object we will call for its dropped method 
-	# and set the current_object to null
-	if id == pick_up_id:
-		if current_object:
-			current_object.dropped()
-			current_object = null
+func on_interact():
+	if not current_object == null:
+			current_object.interact()
 
 
-func on_button_pressed(id: int):
+func on_pickup(pressed: bool):
 	# If the object we try to pick up is in the group of interactable, we will 
 	# set our current_object to this object
-	if id == pick_up_id:
-		current_object = _try_pick_up_interactable()
+	if pressed:
+		current_object = _try_pick_up_closest_interactable()
 		if not current_object == null:
 			# As sometimes it is practicable to set the rigidbodies to sleeping
 			# so they stay in position, disable this now.
@@ -47,15 +48,24 @@ func on_button_pressed(id: int):
 			# from the moment it has been picked up will be applied, not the rotation
 			# that the controller already has when picking up
 			global_transform.basis = Basis.IDENTITY
-	# To prevent errors we will first check if the current object is set and then 
-	# call for its interact method
-	elif id == interact_id:
-		if not current_object == null:
-			current_object.interact()
+	else:
+	# If we are no longer holding the object we will call for its dropped method 
+	# and set the current_object to null
+		if current_object:
+			current_object.dropped()
+			current_object = null
 
 
-func _try_pick_up_interactable():
+func _try_pick_up_closest_interactable():
+	var closest_distance = INF
+	var closest_body
+	
 	for body in area.get_overlapping_bodies():
 		if body.is_in_group("Interactable"):
-			body.picked_up(controller, self)
-			return body
+			var distance = global_transform.origin.distance_to(body.global_transform.origin)
+			if distance < closest_distance:
+				closest_distance = distance
+				closest_body = body
+	
+	if not closest_body == null: closest_body.picked_up(controller_id, self)
+	return closest_body
