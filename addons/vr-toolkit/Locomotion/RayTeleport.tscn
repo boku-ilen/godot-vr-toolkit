@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/vr-toolkit/Locomotion/RayTeleport.gd" type="Script" id=1]
+[ext_resource path="res://addons/godot-openvr/OpenVRAction.gdns" type="Script" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
 vertex_color_use_as_albedo = true
@@ -25,11 +26,12 @@ transmission = Color( 1, 0, 0.984314, 1 )
 
 [node name="RayTeleport" type="Spatial"]
 script = ExtResource( 1 )
-_origin_path = NodePath("../..")
 min_pitch = -160.0
+max_distance = 200.0
 visualizer_material = SubResource( 1 )
 
 [node name="HorizontalRay" type="RayCast" parent="."]
+enabled = true
 cast_to = Vector3( 0, 0, -500 )
 collide_with_areas = true
 
@@ -39,6 +41,13 @@ material/0 = SubResource( 3 )
 
 [node name="Node" type="Node" parent="."]
 
+[node name="TallRay" type="RayCast" parent="Node"]
+enabled = true
+
 [node name="Visualizer" type="ImmediateGeometry" parent="Node"]
 
-[node name="TallRay" type="RayCast" parent="Node"]
+[node name="Inputs" type="Node" parent="."]
+
+[node name="TeleportInput" type="Node" parent="Inputs"]
+script = ExtResource( 2 )
+pressed_action = "/actions/godot_ingame/in/trigger"

@@ -1,12 +1,10 @@
-extends "res://addons/vr-toolkit/ARVRControllerExtension.gd"
+extends "res://addons/vr-toolkit/Controller/ControllerTool.gd"
 
 # https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#enum-globalscope-joysticklist
-export(int) var teleport_id = 1
 export(float) var min_pitch = -80
 export(float) var max_pitch = 130
 export(float) var max_distance = 500
 export(float) var cast_height = 6
-export(float) var controller_degree_compensation = -60
 export(Color) var can_teleport = Color.green
 export(Color) var cannot_teleport = Color.red
 
@@ -25,24 +23,16 @@ export(SpatialMaterial) var visualizer_material = SpatialMaterial.new()
 func _ready():
 	tall_ray.enabled = true
 	horizontal_ray.enabled = true
+	$Inputs/TeleportInput.connect("pressed", self, "on_teleport")
+	
 	visualizer.set_material_override(visualizer_material)
 	position_indicator.set_material_override(visualizer_material)
 	_init_bezier()
-	horizontal_ray.rotation_degrees.x = controller_degree_compensation
 
 
-# Because we need to have 3 points to draw the bezier we have to initialize them
-# with a value
-func _init_bezier():
-	bezier.add_point(Vector3.ZERO)
-	bezier.add_point(Vector3.ZERO)
-	bezier.add_point(Vector3.ZERO)
-
-
-func on_button_pressed(id):
-	if id == teleport_id:
-		if tall_ray.is_colliding():
-			origin.translation = tall_ray.get_collision_point()
+func on_teleport():
+	if tall_ray.is_colliding():
+		origin.translation = tall_ray.get_collision_point()
 
 
 func _process(delta):
@@ -94,7 +84,7 @@ func _find_cast_position():
 
 
 func _draw_bezier():
-	var start_pos = controller.get_global_transform().origin
+	var start_pos = get_global_transform().origin
 	var end_pos
 	var mid_pos
 	
@@ -110,14 +100,14 @@ func _draw_bezier():
 	var distance = start_pos.distance_to(end_pos)
 	# The mid point will get higher, the further away the collision happens
 	mid_pos = (end_pos + start_pos) / 2 + Vector3.UP * (distance / 10)
-
+	
 	bezier.set_point_position(0, start_pos)
 	bezier.set_point_position(1, mid_pos)
 	bezier.set_point_position(2, end_pos)
 	# Also set the in- and out-point (this makes the bezier effect)
 	var direction = (end_pos - start_pos).normalized()
-	bezier.set_point_in(1, direction * -2)
-	bezier.set_point_out(1, direction * 2)
+	bezier.set_point_in(1, direction * -0.2 * distance)
+	bezier.set_point_out(1, direction * 0.2 * distance)
 
 
 # Give the points of the curve to the ImmediateGeometry-Node which do the visualization
@@ -129,3 +119,11 @@ func _visualize():
 		visualizer.add_vertex(vertex)
 
 	visualizer.end()
+
+
+# Because we need to have 3 points to draw the bezier we have to initialize them
+# with a value
+func _init_bezier():
+	bezier.add_point(Vector3.ZERO)
+	bezier.add_point(Vector3.ZERO)
+	bezier.add_point(Vector3.ZERO)
