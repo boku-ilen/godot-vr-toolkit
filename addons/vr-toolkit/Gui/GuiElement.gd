@@ -16,9 +16,9 @@ func connect_mouse_entered(node: Control):
 
 # The mouse entered signal is connected to this function
 func controller_feedback():
-	GlobalVRAccess.controller_id_dict[active_controller].rumble = 0.3
-	yield(get_tree(), "physics_frame")
-	GlobalVRAccess.controller_id_dict[active_controller].rumble = 0.0
+	#GlobalVRAccess.controller_id_dict[active_controller].rumble = 0.3
+	#yield(get_tree(), "physics_frame")
+	pass#GlobalVRAccess.controller_id_dict[active_controller].rumble = 0.0
 
 
 # On any input set the device to the current controller's id
