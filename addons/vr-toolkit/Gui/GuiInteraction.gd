@@ -8,16 +8,14 @@ export(bool) var enabled = true
 onready var interact_ray: RayCast = get_node("RayCast")
 onready var line_visualizer = get_node("ImmediateGeometry")
 onready var point_visualizer = get_node("Node/MeshInstance")
-onready var menu_input = get_node("Inputs/MenuInput")
-onready var interact_input = get_node("Inputs/InteractInput")
 
 var direction: Vector3
 
 func _ready():
-	menu_input.connect("pressed", self, "toggle_menu", [true])
-	menu_input.connect("released", self, "toggle_menu", [false])
-	interact_input.connect("pressed", self, "interact", [true])
-	interact_input.connect("released", self, "interact", [false])
+	$Inputs/MenuInput.connect("pressed", self, "toggle_menu", [true])
+	$Inputs/MenuInput.connect("released", self, "toggle_menu", [false])
+	$Inputs/InteractInput.connect("pressed", self, "interact", [true])
+	$Inputs/InteractInput.connect("released", self, "interact", [false])
 	
 	line_visualizer.set_material_override(visualizer_material)
 	
@@ -71,6 +69,7 @@ func toggle_menu(pressed: bool):
 
 
 func interact(pressed: bool):
+	# Only make interaction possible if enabled
 	if enabled:
 		if pressed:
 			if not interact_ray.get_collider() == null:

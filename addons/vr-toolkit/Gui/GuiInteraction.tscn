@@ -20,13 +20,11 @@ script = ExtResource( 1 )
 visualizer_material = SubResource( 1 )
 
 [node name="RayCast" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 enabled = true
 collision_mask = 524288
 collide_with_areas = true
 
 [node name="ImmediateGeometry" type="ImmediateGeometry" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Node" type="Node" parent="."]
 
@@ -36,10 +34,10 @@ material/0 = null
 
 [node name="Inputs" type="Node" parent="."]
 
-[node name="InteractInput" type="Spatial" parent="Inputs"]
+[node name="InteractInput" type="Node" parent="Inputs"]
 script = ExtResource( 2 )
 pressed_action = "/actions/godot_ingame/in/trigger"
 
-[node name="MenuInput" type="Spatial" parent="Inputs"]
+[node name="MenuInput" type="Node" parent="Inputs"]
 script = ExtResource( 2 )
 pressed_action = "/actions/godot_ingame/in/menu"
