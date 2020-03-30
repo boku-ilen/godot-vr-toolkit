@@ -16,19 +16,29 @@ func _ready():
 	$Inputs/PointingInput.connect("released", self, "set_pointing", [false])
 	$Inputs/GrabbingInput.connect("pressed", self, "set_grabbing", [true])
 	$Inputs/GrabbingInput.connect("released", self, "set_grabbing", [false])
-	$Inputs/ThumbInput.connect("pressed", self, "set_thumb", [true])
-	$Inputs/ThumbInput.connect("released", self, "set_thumb", [false])
+	$Inputs/ThumbInput.connect("pressed", self, "set_thumb", [false])
+	$Inputs/ThumbInput.connect("released", self, "set_thumb", [true])
 
 
 func apply_gesture():
 	if pointing:
-		for animation in anim.get_animation_list():
-			if not animation.begins_with("thumb"):# or not animation.begins_with("point"):
-				anim.play(animation)
-	elif grabbing:
-		pass
-	elif thumb_on_ax:
-		pass
+		anim.play("Point")
+		anim.advance(1)
+	else:
+		anim.play("Point")
+		anim.advance(-1)
+	if grabbing:
+		anim.play("Grab")
+		anim.advance(1)
+	else:
+		anim.play("Grab")
+		anim.advance(-1)
+	if thumb_on_ax:
+		anim.play("Thumb", -1, 1.0, true)
+		anim.advance(-1)
+	else:
+		anim.play("Thumb", -1, 1.0, true)
+		anim.advance(1)
 
 
 func set_pointing(is_pointing):
