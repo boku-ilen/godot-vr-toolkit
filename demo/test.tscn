@@ -104,6 +104,12 @@ size = Vector2( 464, 464 )
 [node name="PlayerVR" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91246, 0 )
 
+[node name="LeftVisual" parent="PlayerVR" index="3"]
+visible = false
+
+[node name="RightVisual" parent="PlayerVR" index="4"]
+visible = false
+
 [node name="Compass" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00404, -1.5636 )
 

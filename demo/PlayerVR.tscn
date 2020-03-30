@@ -26,9 +26,10 @@ on_hand = 2
 
 [node name="ObjectInteraction" parent="Left/Raw" index="0" instance=ExtResource( 8 )]
 
-[node name="Gestures" parent="Left/Raw" index="1" instance=ExtResource( 9 )]
-
 [node name="RayTeleport" parent="Left/Tip" index="0" instance=ExtResource( 7 )]
+
+[node name="Gestures" parent="Left/Tip" index="1" instance=ExtResource( 9 )]
+controller_side = 1
 
 [node name="Right" parent="." instance=ExtResource( 2 )]
 controller_side = 2
@@ -52,10 +53,14 @@ on_hand = 2
 [node name="MenuInput" parent="Right/Tip/GuiInteraction/Inputs" index="1"]
 on_hand = 2
 
+[node name="Gestures" parent="Right/Tip" index="1" instance=ExtResource( 9 )]
+
 [node name="LeftVisual" parent="." instance=ExtResource( 1 )]
+show_controller_mesh = false
 
 [node name="RightVisual" parent="." instance=ExtResource( 1 )]
 controller_id = 2
+show_controller_mesh = false
 
 [editable path="Left"]
 
