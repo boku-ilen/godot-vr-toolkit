@@ -2,7 +2,7 @@ extends InteractableObject
 
 export(float) var pew_jectile_speed = 100
 
-onready var pew_jectile = preload("res://testing/InteractableObjects/PewPew/PewJectile.tscn")
+onready var pew_jectile = preload("res://demo/InteractableObjects/PewPew/PewJectile.tscn")
 onready var meshes = get_node("Spatial")
 
 

@@ -1,7 +1,7 @@
 extends BoxContainer
 
 
-onready var object_button = load("res://testing/InteractableObjects/Menu/ObjectButton.tscn")
+onready var object_button = load("res://demo/InteractableObjects/Menu/ObjectButton.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
