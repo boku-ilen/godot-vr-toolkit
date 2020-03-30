@@ -1,10 +1,10 @@
 extends Spatial
 
 
-onready var default_gesture = get_node("Meshes/Pointing")
-onready var grabbing_gesture = get_node("Meshes/Grabbing")
-onready var pointing_gesture = get_node("Meshes/Default")
-#onready var pointing = preload("res://addons/vr-toolkit/Controller/Hand/")
+export(int, "any", "left", "right") var controller_side setget set_controller_side
+
+onready var anim = get_node("HandDefault/AnimationPlayer")
+onready var hand = get_node("HandDefault")
 
 var pointing: bool = false
 var grabbing: bool = false
@@ -22,19 +22,13 @@ func _ready():
 
 func apply_gesture():
 	if pointing:
-		_hide_gestures()
-		pointing_gesture.visible = true
+		for animation in anim.get_animation_list():
+			if not animation.begins_with("thumb"):# or not animation.begins_with("point"):
+				anim.play(animation)
 	elif grabbing:
-		_hide_gestures()
-		grabbing_gesture.visible = true
+		pass
 	elif thumb_on_ax:
-		_hide_gestures()
-		default_gesture.visible = true
-
-
-func _hide_gestures():
-	for child in get_node("Meshes").get_children():
-		child.visible = false
+		pass
 
 
 func set_pointing(is_pointing):
@@ -50,3 +44,10 @@ func set_grabbing(is_grabbing):
 func set_thumb(thumb_on):
 	thumb_on_ax = thumb_on
 	apply_gesture()
+
+
+# If left, mirror scene
+func set_controller_side(id):
+	yield(self, "ready")
+	if id == 1:
+		hand.scale.y = -1

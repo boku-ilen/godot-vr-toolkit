@@ -1,15 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/godot-openvr/OpenVRAction.gdns" type="Script" id=1]
 [ext_resource path="res://addons/vr-toolkit/Controller/Hand/Gestures.gd" type="Script" id=2]
-[ext_resource path="res://addons/vr-toolkit/Controller/Hand/Default.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/vr-toolkit/Controller/Hand/Pointing.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/vr-toolkit/Controller/Hand/Grabbing.tscn" type="PackedScene" id=5]
-
-[sub_resource type="SpatialMaterial" id=1]
-albedo_color = Color( 1, 0, 0, 1 )
+[ext_resource path="res://addons/vr-toolkit/Controller/Hand/HandDefault.tscn" type="PackedScene" id=3]
 
 [node name="Gestures" type="Spatial"]
+transform = Transform( 8.14603e-09, 0.05, -1.62921e-08, 0.05, -8.14603e-09, 0, -2.65431e-15, -1.62921e-08, -0.05, 0, 0, 0 )
 script = ExtResource( 2 )
 
 [node name="Inputs" type="Node" parent="."]
@@ -28,14 +24,4 @@ pressed_action = "/actions/godot_ingame/in/touch_ax"
 
 [node name="Node4" type="Node" parent="Inputs"]
 
-[node name="Meshes" type="Spatial" parent="."]
-
-[node name="Pointing" parent="Meshes" instance=ExtResource( 4 )]
-visible = false
-
-[node name="Grabbing" parent="Meshes" instance=ExtResource( 5 )]
-visible = false
-material/0 = SubResource( 1 )
-
-[node name="Default" parent="Meshes" instance=ExtResource( 3 )]
-visible = false
+[node name="HandDefault" parent="." instance=ExtResource( 3 )]
