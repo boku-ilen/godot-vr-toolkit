@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="SphereMesh" id=1]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="CapsuleMesh" id=2]
+radius = 0.02
+mid_height = 0.1
+
+[node name="Spatial" type="MeshInstance"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.822253, 0, -0.569122, 0, 1, 0, 0.569122, 0, 0.822253, -0.000946537, 0.0181343, -0.043861 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 0.254838, -0.25796, -0.931942, 0, 0.963761, -0.266768, 0.966984, 0.0679826, 0.245603, -0.00286843, 0.017893, -0.029135 )
+mesh = SubResource( 2 )
+material/0 = null

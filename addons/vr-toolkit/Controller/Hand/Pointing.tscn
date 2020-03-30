@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.243137, 1, 0, 1 )
+
+[sub_resource type="SphereMesh" id=1]
+material = SubResource( 3 )
+radius = 0.05
+height = 0.1
+
+[sub_resource type="CapsuleMesh" id=2]
+radius = 0.02
+mid_height = 0.15
+
+[node name="Spatial" type="MeshInstance"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0347592, -0.0120658, -0.09826 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.374817, -0.927099, 0, 0.927099, 0.374817, 0.00493738, 0.0409814, -0.0164822 )
+mesh = SubResource( 2 )
+material/0 = null
