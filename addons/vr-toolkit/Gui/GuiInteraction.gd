@@ -44,7 +44,6 @@ func _process(delta):
 			var colliding_distance = global_transform.origin.distance_to(interact_ray.get_collision_point())
 			draw_line(translation, direction.normalized() * colliding_distance)
 			# Call the function which managed the input on the viewport in ViewportToMesh.gd
-			#TODO REMOVE HARDCODE
 			interact_ray.get_collider().get_parent().ray_interaction_input(
 				interact_ray.get_collision_point(), InputEventMouseMotion, controller_id)
 		else:
