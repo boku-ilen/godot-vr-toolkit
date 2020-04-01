@@ -6,28 +6,30 @@ extends ARVROrigin
 # You can specify your own custom action file here.
 # Note that you can take out all default actions if you wish to use your own but
 # features such as ARVRController.get_joystick_axis and ARVRController.is_button_pressed won't work.
-export(String, FILE, "*.json") var action_json_path = "res://addons/godot-openvr/actions/actions.json"
+export (String, FILE, "*.json") var action_json_path = "res://addons/godot-openvr/actions/actions.json"
 
 # The plugin always registers atleast one action set.
 # If you have renamed this action set you can specify the name here
-export (String) var default_action_set = "/actions/godot_ingame"
+export (String) var default_action_set = "/actions/godot"
 
 # If we render to a custom viewport give our node path here.
 export (NodePath) var viewport = null
 
 var arvr_interface : ARVRInterface = null
-var OpenVRConfig = null
+var openvr_config = null
 
+func get_openvr_config():
+	return openvr_config
 
 func _ready():
 	# Load our config before we initialise
-	OpenVRConfig = preload("res://addons/godot-openvr/OpenVRConfig.gdns");
-	if OpenVRConfig:
+	openvr_config = preload("res://addons/godot-openvr/OpenVRConfig.gdns");
+	if openvr_config:
 		print("Setup configuration")
-		OpenVRConfig = OpenVRConfig.new()
+		openvr_config = openvr_config.new()
 		
-		OpenVRConfig.action_json_path = action_json_path
-		OpenVRConfig.default_action_set = default_action_set
+		openvr_config.action_json_path = action_json_path
+		openvr_config.default_action_set = default_action_set
 
 	# Find the interface and initialise
 	arvr_interface = ARVRServer.find_interface("OpenVR")
@@ -55,5 +57,5 @@ func _ready():
 		OS.vsync_enabled = false
 		
 		# up our physics to 90fps to get in sync with our rendering
-		Engine.target_fps = 90
+		Engine.iterations_per_second = 90
 
