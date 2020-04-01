@@ -1,15 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/godot-openvr/OpenVRAction.gdns" type="Script" id=1]
 [ext_resource path="res://addons/vr-toolkit/Controller/Hand/Gestures.gd" type="Script" id=2]
 [ext_resource path="res://addons/vr-toolkit/Controller/Hand/HandDefault.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/vr-toolkit/Gui/GuiFinger.gd" type="Script" id=4]
+[ext_resource path="res://addons/vr-toolkit/Gui/GuiFinger.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CapsuleShape" id=5]
-radius = 0.136308
-height = 0.318413
-
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "0"
 length = 0.833333
 tracks/0/type = "transform"
@@ -41,7 +37,7 @@ tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.833333, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "1"
 length = 0.833333
 tracks/0/type = "transform"
@@ -73,8 +69,7 @@ tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.833333, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "2"
+[sub_resource type="Animation" id=3]
 length = 0.833333
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:middle_3")
@@ -179,26 +174,18 @@ pressed_action = "/actions/godot_ingame/in/button_ax"
 
 [node name="HandDefault" parent="." instance=ExtResource( 3 )]
 
+[node name="Skeleton" parent="HandDefault/Armature" index="0"]
+bones/3/bound_children = [ NodePath("Index") ]
+bones/6/bound_children = [ NodePath("Middle") ]
+bones/9/bound_children = [ NodePath("Ring") ]
+bones/12/bound_children = [ NodePath("Pinky") ]
+bones/15/bound_children = [ NodePath("Thumb") ]
+
 [node name="Index" type="BoneAttachment" parent="HandDefault/Armature/Skeleton" index="1"]
 transform = Transform( 0.975734, 0.196838, -0.0959022, -0.196604, 0.98041, 0.0119764, 0.0963809, 0.00716901, 0.995319, 0.700328, 2.98927, 0.0458557 )
 bone_name = "point_3"
 
-[node name="Spatial" type="Spatial" parent="HandDefault/Armature/Skeleton/Index"]
-transform = Transform( 1, -4.47035e-08, 8.73115e-08, 0, 1, 2.79397e-09, -4.65661e-10, 9.31323e-10, 1, 0.00419219, 0.183974, -0.0017308 )
-script = ExtResource( 4 )
-
-[node name="Area" type="Area" parent="HandDefault/Armature/Skeleton/Index/Spatial"]
-transform = Transform( 0.997083, 0.0763273, -0.000267292, -0.0763232, 0.997056, 0.00741189, 0.000832239, -0.00736987, 0.999973, 0, 0, 0 )
-input_ray_pickable = false
-collision_layer = 0
-collision_mask = 524288
-
-[node name="CollisionShape" type="CollisionShape" parent="HandDefault/Armature/Skeleton/Index/Spatial/Area"]
-transform = Transform( 0.952058, 0.287964, 0.103263, 0.0961598, 0.0387453, -0.994612, -0.290413, 0.956857, 0.00919717, 0.00208159, 0.000154853, 0.0214964 )
-shape = SubResource( 5 )
-
-[node name="FingerTip" type="Spatial" parent="HandDefault/Armature/Skeleton/Index/Spatial"]
-transform = Transform( 1, -7.45058e-08, 3.70201e-08, -1.49012e-08, 1, -1.86265e-09, -2.72412e-08, -7.45058e-09, 1, -0.0228158, 0.23653, 0.000505626 )
+[node name="GuiFinger" parent="HandDefault/Armature/Skeleton/Index" instance=ExtResource( 4 )]
 
 [node name="Middle" type="BoneAttachment" parent="HandDefault/Armature/Skeleton" index="2"]
 transform = Transform( 0.995332, 0.00108562, -0.0965034, 0.00876084, 0.994792, 0.10155, 0.096111, -0.101921, 0.990139, 0.0819126, 3.26059, 0.0746803 )
@@ -217,8 +204,8 @@ transform = Transform( 0.648311, 0.761125, -0.0195158, -0.75551, 0.646281, 0.107
 bone_name = "thumb_3"
 
 [node name="AnimationPlayer" parent="HandDefault" index="1"]
-anims/0 = SubResource( 4 )
-anims/1 = SubResource( 3 )
-anims/2 = SubResource( 2 )
+anims/0 = SubResource( 1 )
+anims/1 = SubResource( 2 )
+anims/2 = SubResource( 3 )
 
 [editable path="HandDefault"]
