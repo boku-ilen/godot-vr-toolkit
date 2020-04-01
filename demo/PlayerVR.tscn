@@ -13,6 +13,7 @@
 [node name="PlayerVR" type="ARVROrigin"]
 script = ExtResource( 4 )
 action_json_path = "res://addons/vr-toolkit/Controller/actions-toolkit.json"
+default_action_set = "/actions/godot_ingame"
 vr_menu = ExtResource( 5 )
 objects_menu = ExtResource( 6 )
 
@@ -56,11 +57,9 @@ on_hand = 2
 [node name="Gestures" parent="Right/Tip" index="1" instance=ExtResource( 9 )]
 
 [node name="LeftVisual" parent="." instance=ExtResource( 1 )]
-show_controller_mesh = false
 
 [node name="RightVisual" parent="." instance=ExtResource( 1 )]
 controller_id = 2
-show_controller_mesh = false
 
 [editable path="Left"]
 
