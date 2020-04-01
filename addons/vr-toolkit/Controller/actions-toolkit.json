@@ -98,7 +98,10 @@
     }
   ],
   "default_bindings" : [
-
+    {
+			"binding_url" : "ocu.json",
+			"controller_type" : "oculus_touch"
+		}
 	],
 	"localization" : [
 		{
