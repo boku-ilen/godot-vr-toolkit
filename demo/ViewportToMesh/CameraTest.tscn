@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://demo/ViewportToMesh/CameraTest.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleMesh" id=1]
 
@@ -10,6 +12,7 @@ current = true
 fov = 128.5
 near = 0.01
 far = 70000.0
+script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -27,3 +30,7 @@ text = "test"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, 0, -2000 )
