@@ -40,4 +40,4 @@ pressed_action = "/actions/godot_ingame/in/trigger"
 
 [node name="MenuInput" type="Node" parent="Inputs"]
 script = ExtResource( 2 )
-pressed_action = "/actions/godot_ingame/in/menu"
+pressed_action = "/actions/godot_ingame/in/button_ax"

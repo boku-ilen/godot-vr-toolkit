@@ -2,24 +2,33 @@ extends MeshInstance
 
 
 export(PackedScene) var viewport_element
-export(bool) var create_collision_areas = false
-export(Vector2) var manual_mesh_size
+export(bool) var interactable = true
+export(Vector2) var mesh_size
 
 onready var viewport = get_node("Viewport")
 onready var area = get_node("Area")
+onready var collision_shape = get_node("Area/CollisionShape")
 onready var viewport_texture = viewport_element.instance()
 
 # The size of the quad mesh itself.
-var quad_mesh_size 
+var quad_mesh_size: Vector2
 var material = SpatialMaterial.new()
 var last_pos2D
 
 
 func _ready():
 	if self.mesh.has_method("get_size"):
+		if not mesh_size == Vector2(0,0):
+			mesh.size = mesh_size
 		quad_mesh_size = mesh.size
 	else:
-		quad_mesh_size = manual_mesh_size
+		quad_mesh_size = mesh_size
+	
+	if interactable:
+		collision_shape.shape = BoxShape.new()
+		collision_shape.shape.extents = Vector3(quad_mesh_size.x / 2, 0.001, quad_mesh_size.y / 2)
+	else:
+		collision_shape.disabled = true
 	
 	# So the viewport size does not have to be set manually
 	if viewport_texture.has_method("get_rect"):

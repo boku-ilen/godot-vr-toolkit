@@ -38,8 +38,7 @@ points = PoolVector3Array( -0.677966, 0.0282486, -1.00565, -0.677966, 0.0282486,
 mesh = SubResource( 1 )
 material/0 = null
 script = ExtResource( 1 )
-create_collision_areas = true
-manual_mesh_size = Vector2( 2, 2 )
+mesh_size = Vector2( 2, 2 )
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 424, 424 )
