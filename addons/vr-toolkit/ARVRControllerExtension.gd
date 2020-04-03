@@ -16,7 +16,7 @@ func _ready():
 
 
 func _process(delta):
-	joystick_position = Vector2(controller.get_joystick_axis(0), controller.get_joystick_axis(1))
+	pass#joystick_position = Vector2(controller.get_joystick_axis(0), controller.get_joystick_axis(1))
 
 
 func _get_configuration_warning():
