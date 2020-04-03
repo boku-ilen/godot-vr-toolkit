@@ -19,3 +19,11 @@ transform = Transform( 1, -1.52656e-15, 0, -5.82867e-16, 1, -6.66134e-16, 0, -1.
 layers = 2
 mesh = SubResource( 1 )
 material/0 = null
+
+[node name="Button" type="Button" parent="."]
+margin_right = 247.0
+margin_bottom = 136.0
+text = "test"
+__meta__ = {
+"_edit_use_anchors_": false
+}
