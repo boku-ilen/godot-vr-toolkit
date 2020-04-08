@@ -1,9 +1,10 @@
 extends MeshInstance
+tool
 
 
 export(PackedScene) var viewport_element
 export(bool) var interactable = true
-export(Vector2) var mesh_size
+export(Vector2) var mesh_size setget set_mesh_size
 
 onready var viewport = get_node("Viewport")
 onready var area = get_node("Area")
@@ -14,6 +15,16 @@ onready var viewport_texture = viewport_element.instance()
 var quad_mesh_size: Vector2
 var material = SpatialMaterial.new()
 var last_pos2D
+
+
+func set_mesh_size(size):
+	mesh_size = size
+	if self.mesh.has_method("get_size"):
+		if not mesh_size == Vector2(0,0):
+			mesh.size = mesh_size
+		quad_mesh_size = mesh.size
+	else:
+		quad_mesh_size = mesh_size
 
 
 func _ready():
