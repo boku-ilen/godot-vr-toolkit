@@ -2,7 +2,6 @@
 
 [ext_resource path="res://demo/ViewportToMesh/UiTest.gd" type="Script" id=1]
 
-
 [node name="VBoxContainer" type="VBoxContainer"]
 margin_right = 464.0
 margin_bottom = 424.0
@@ -22,33 +21,33 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="HBoxContainer"]
-margin_right = 180.0
+margin_right = 96.0
 margin_bottom = 350.0
 toggle_mode = true
 text = "TEEEEEEEEEST"
 
 [node name="Control" type="CheckButton" parent="HBoxContainer"]
-margin_left = 188.0
-margin_right = 340.0
-margin_bottom = 348.088
+margin_left = 100.0
+margin_right = 176.0
+margin_bottom = 350.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-margin_left = 348.0
-margin_top = 147.0
-margin_right = 424.0
-margin_bottom = 203.0
+margin_left = 180.0
+margin_top = 159.0
+margin_right = 224.0
+margin_bottom = 190.0
 text = ":))))))))))
 "
 
 [node name="VSlider" type="VSlider" parent="HBoxContainer"]
-margin_left = 432.0
-margin_right = 464.0
+margin_left = 228.0
+margin_right = 244.0
 margin_bottom = 350.0
 
 [node name="HSlider" type="HSlider" parent="."]
-margin_top = 358.0
+margin_top = 354.0
 margin_right = 464.0
-margin_bottom = 390.0
+margin_bottom = 370.0

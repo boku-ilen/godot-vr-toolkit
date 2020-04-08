@@ -17,6 +17,9 @@ var interface
 func _ready():
 	GlobalVRAccess.controller_id_dict[controller_left.controller_id] = controller_left
 	GlobalVRAccess.controller_id_dict[controller_right.controller_id] = controller_right
+	
+	init_object_menu()
+	init_vr_menu()
 
 
 func init_vr_menu():
