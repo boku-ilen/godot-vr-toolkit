@@ -2,7 +2,6 @@
 
 [ext_resource path="res://demo/InteractableObjects/PewPew/PewPew.gd" type="Script" id=1]
 
-
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.3, 0.4, 0.3 )
 
