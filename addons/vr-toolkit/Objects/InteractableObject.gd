@@ -6,6 +6,7 @@ onready var original_parent = get_parent()
 var controller_id: int
 var object_interaction
 var _is_picked_up: bool = false
+var _is_interacting: bool = false
 
 
 # Onready add it to the group of interactable, so the ObjectInteraction node can
@@ -16,7 +17,11 @@ func _ready():
 
 # This method will be called, when the interaction-button is pressed on the current controller
 func interact():
-	pass
+	_is_interacting = true
+
+
+func interact_end():
+	_is_interacting = false
 
 
 # This happens when the pick-up-button is pressed on the current controller

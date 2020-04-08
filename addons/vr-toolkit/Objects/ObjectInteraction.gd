@@ -14,7 +14,8 @@ var velocities = Array()
 func _ready():
 	$Inputs/PickUpInput.connect("pressed", self, "on_pickup", [true])
 	$Inputs/PickUpInput.connect("released", self, "on_pickup", [false])
-	$Inputs/InteractInput.connect("pressed", self, "on_interact")
+	$Inputs/InteractInput.connect("pressed", self, "on_interact", [true])
+	$Inputs/InteractInput.connect("released", self, "on_interact", [false])
 
 
 func _process(delta):
@@ -32,9 +33,12 @@ func _process(delta):
 		current_object.global_transform = current_object.global_transform.orthonormalized()
 
 
-func on_interact():
+func on_interact(pressed):
 	if not current_object == null:
+		if pressed:
 			current_object.interact()
+		else:
+			current_object.interact_end()
 
 
 func on_pickup(pressed: bool):
