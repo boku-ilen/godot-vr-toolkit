@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/vr-toolkit/Resources/compass.svg" type="Texture" id=1]
 [ext_resource path="res://demo/InteractableObjects/Compass/Compass.gd" type="Script" id=2]
 
-
 [sub_resource type="CylinderMesh" id=1]
 top_radius = 0.12
 bottom_radius = 0.05

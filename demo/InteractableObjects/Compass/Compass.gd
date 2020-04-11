@@ -6,14 +6,18 @@ extends InteractableObject
 #
 
 onready var compass_symbol = get_node("Spatial")
+onready var mesh = get_node("MeshInstance")
 
+var transform_before: Transform = Transform.IDENTITY
 
 func _process(delta):
-	if _is_picked_up:
-		var compass_plate_plane = Plane(object_interaction.global_transform.basis.y, 0)
+	if not transform_before == transform:
+		var compass_plate_plane = Plane(mesh.global_transform.basis.y, 0)
 		
 		var new_forward = compass_plate_plane.project(Vector3.FORWARD).normalized()
-		var new_up = object_interaction.global_transform.basis.y
+		var new_up = mesh.global_transform.basis.y
 		var new_right = new_forward.cross(new_up)
 		
 		compass_symbol.global_transform.basis = Basis(new_right, new_up, -new_forward)
+	
+	transform_before = transform
