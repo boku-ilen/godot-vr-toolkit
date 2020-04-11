@@ -99,7 +99,7 @@
   ],
   "default_bindings" : [
     {
-			"binding_url" : "ocu.json",
+			"binding_url" : "bindings_oculus_touch.json",
 			"controller_type" : "oculus_touch"
 		}
 	],
