@@ -52,7 +52,7 @@ func _process(delta):
 		visualizer_material.emission = cannot_teleport
 
 	_draw_bezier()
-	_visualize()
+	visualizer.points = bezier.get_baked_points()
 
 
 # Finds the maximum distance along the horizontal ray
@@ -111,20 +111,6 @@ func _draw_bezier():
 	bezier.set_point_out(1, direction * 0.2 * distance)
 	
 	bezier.set_bake_interval(distance / curve_edges)
-
-
-# Give the points of the curve to the ImmediateGeometry-Node which do the visualization
-func _visualize():
-#	visualizer.clear()
-#	visualizer.begin(Mesh.PRIMITIVE_LINE_STRIP)
-#
-#	for vertex in bezier.get_baked_points():
-#		visualizer.add_vertex(vertex)
-#
-#	visualizer.end()
-	
-	
-	visualizer.points = bezier.get_baked_points()
 
 
 # Because we need to have 3 points to draw the bezier we have to initialize them
