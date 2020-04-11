@@ -6,7 +6,7 @@ export(float) var point_radius = 0.04
 export(bool) var enabled = true
 
 onready var interact_ray: RayCast = get_node("RayCast")
-onready var line_visualizer = get_node("ImmediateGeometry")
+onready var line_visualizer = get_node("LineRenderer")
 onready var point_visualizer = get_node("Node/MeshInstance")
 
 var direction: Vector3
@@ -26,7 +26,7 @@ func _ready():
 	interact_ray.set_cast_to(-(transform.basis.z) * ray_length)
 	
 	direction = -(transform.basis.z) * ray_length
-	draw_line(global_transform.origin, direction)
+	line_visualizer.set_points([Vector3.ZERO, direction])
 
 
 func _process(delta):
@@ -42,24 +42,16 @@ func _process(delta):
 			# The line should end where the ray collides - thus we find the 
 			# distance from the start point colliding point and with it we multiply forward
 			var colliding_distance = global_transform.origin.distance_to(interact_ray.get_collision_point())
-			draw_line(translation, direction.normalized() * colliding_distance)
+			line_visualizer.set_points([Vector3.ZERO, direction.normalized() * colliding_distance])
 			# Call the function which managed the input on the viewport in ViewportToMesh.gd
 			interact_ray.get_collider().get_parent().ray_interaction_input(
-				interact_ray.get_collision_point(), InputEventMouseMotion, controller_id)
+			interact_ray.get_collision_point(), InputEventMouseMotion, controller_id)
 		else:
 			# Not colliding -> no point and longer ray
 			point_visualizer.set_visible(false)
-			draw_line(translation, direction)
+			line_visualizer.set_points([Vector3.ZERO, direction])
 	else:
 		hide()
-
-
-func draw_line(var begin: Vector3, var end: Vector3):
-	line_visualizer.clear()
-	line_visualizer.begin(Mesh.PRIMITIVE_LINES)
-	line_visualizer.add_vertex(begin)
-	line_visualizer.add_vertex(end)
-	line_visualizer.end()
 
 
 func toggle_menu(pressed: bool):
