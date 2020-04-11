@@ -143,7 +143,7 @@ tracks/9/enabled = true
 tracks/9/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.833333, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
 [node name="Gestures" type="Spatial"]
-transform = Transform( 8.14603e-09, 0.05, -1.62921e-08, 0.05, -8.14603e-09, 0, -2.65431e-15, -1.62921e-08, -0.05, -0.0340438, -0.0422028, 0.0244641 )
+transform = Transform( 8.14603e-09, 0.05, -1.94707e-08, 0.05, -8.14603e-09, 1.0348e-20, -3.17217e-15, -1.94707e-08, -0.05, 0.0379551, -0.0422028, 0.0244641 )
 script = ExtResource( 2 )
 
 [node name="Inputs" type="Node" parent="."]
@@ -179,13 +179,23 @@ bones/3/bound_children = [ NodePath("Index") ]
 bones/6/bound_children = [ NodePath("Middle") ]
 bones/9/bound_children = [ NodePath("Ring") ]
 bones/12/bound_children = [ NodePath("Pinky") ]
+bones/15/rest = Transform( 0.995, 0.093, -0.032, -0.087, 0.983, 0.164, 0.047, -0.002, 0.986, 0, 0.645, 0 )
 bones/15/bound_children = [ NodePath("Thumb") ]
+
+[node name="Hand" parent="HandDefault/Armature/Skeleton" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.35, 0, 0, 0 )
 
 [node name="Index" type="BoneAttachment" parent="HandDefault/Armature/Skeleton" index="1"]
 transform = Transform( 0.975734, 0.196838, -0.0959022, -0.196604, 0.98041, 0.0119764, 0.0963809, 0.00716901, 0.995319, 0.700328, 2.98927, 0.0458557 )
 bone_name = "point_3"
 
 [node name="GuiFinger" parent="HandDefault/Armature/Skeleton/Index" instance=ExtResource( 4 )]
+
+[node name="Area" parent="HandDefault/Armature/Skeleton/Index/GuiFinger" index="0"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+
+[node name="CollisionShape" parent="HandDefault/Armature/Skeleton/Index/GuiFinger/Area" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96046e-08, 0, -5.96046e-08 )
 
 [node name="Middle" type="BoneAttachment" parent="HandDefault/Armature/Skeleton" index="2"]
 transform = Transform( 0.995332, 0.00108562, -0.0965034, 0.00876084, 0.994792, 0.10155, 0.096111, -0.101921, 0.990139, 0.0819126, 3.26059, 0.0746803 )
@@ -200,7 +210,7 @@ transform = Transform( 0.953953, -0.291652, -0.0700865, 0.279839, 0.949468, -0.1
 bone_name = "pinky_3"
 
 [node name="Thumb" type="BoneAttachment" parent="HandDefault/Armature/Skeleton" index="5"]
-transform = Transform( 0.648311, 0.761125, -0.0195158, -0.75551, 0.646281, 0.107357, 0.0943246, -0.054856, 0.994029, 1.4187, 1.36349, 0.0853228 )
+transform = Transform( 0.648066, 0.743594, -0.0195462, -0.755588, 0.641447, 0.107047, 0.0943398, 0.102737, 0.99412, 1.41893, 1.36373, 0.085356 )
 bone_name = "thumb_3"
 
 [node name="AnimationPlayer" parent="HandDefault" index="1"]
@@ -209,3 +219,5 @@ anims/1 = SubResource( 2 )
 anims/2 = SubResource( 3 )
 
 [editable path="HandDefault"]
+
+[editable path="HandDefault/Armature/Skeleton/Index/GuiFinger"]

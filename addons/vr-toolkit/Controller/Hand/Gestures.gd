@@ -54,3 +54,4 @@ func set_controller_side(id):
 	yield(self, "ready")
 	if id == 1:
 		hand.scale.y = -1
+		translation.x *= -1
