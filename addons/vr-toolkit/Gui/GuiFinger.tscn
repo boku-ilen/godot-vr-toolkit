@@ -3,8 +3,8 @@
 [ext_resource path="res://addons/vr-toolkit/Gui/GuiFinger.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleShape" id=1]
-radius = 0.136308
-height = 0.318413
+radius = 0.0999898
+height = 0.334358
 
 [node name="GuiFinger" type="Spatial"]
 transform = Transform( 1, -4.47035e-08, 8.73115e-08, 0, 1, 2.79397e-09, -4.65661e-10, 9.31323e-10, 1, 0.00419219, 0.183974, -0.0017308 )
