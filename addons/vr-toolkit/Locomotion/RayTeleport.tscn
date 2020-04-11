@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/vr-toolkit/Locomotion/RayTeleport.gd" type="Script" id=1]
 [ext_resource path="res://addons/godot-openvr/OpenVRAction.gdns" type="Script" id=2]
+[ext_resource path="res://addons/vr-toolkit/Util/LineRenderer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/vr-toolkit/Resources/teleport_texture.png" type="Texture" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
 vertex_color_use_as_albedo = true
+albedo_color = Color( 1, 0, 0, 1 )
+albedo_texture = ExtResource( 5 )
 emission_enabled = true
 emission = Color( 0, 0, 0, 1 )
 emission_energy = 4.44
@@ -44,7 +49,12 @@ material/0 = SubResource( 3 )
 [node name="TallRay" type="RayCast" parent="Node"]
 enabled = true
 
-[node name="Visualizer" type="ImmediateGeometry" parent="Node"]
+[node name="LineRenderer" parent="Node" instance=ExtResource( 3 )]
+startThickness = 0.005
+endThickness = 0.005
+drawCaps = false
+drawCorners = false
+scaleTexture = false
 
 [node name="Inputs" type="Node" parent="."]
 

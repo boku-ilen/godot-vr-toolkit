@@ -5,6 +5,7 @@ export(float) var min_pitch = -80
 export(float) var max_pitch = 130
 export(float) var max_distance = 500
 export(float) var cast_height = 6
+export(int) var curve_edges = 30
 export(Color) var can_teleport = Color.green
 export(Color) var cannot_teleport = Color.red
 
@@ -13,7 +14,7 @@ onready var horizontal_ray = get_node("HorizontalRay")
 # Then we set the position each frame.
 onready var tall_ray = get_node("Node/TallRay")
 onready var position_indicator = get_node("PositionIndicator")
-onready var visualizer = get_node("Node/Visualizer")
+onready var visualizer = get_node("Node/LineRenderer")
 onready var bezier = Curve3D.new()
 
 var horizontal_point: Vector3
@@ -99,7 +100,7 @@ func _draw_bezier():
 	
 	var distance = start_pos.distance_to(end_pos)
 	# The mid point will get higher, the further away the collision happens
-	mid_pos = (end_pos + start_pos) / 2 + Vector3.UP * (distance / 10)
+	mid_pos = (end_pos + start_pos) / 2 + Vector3.UP * (distance / 5)
 	
 	bezier.set_point_position(0, start_pos)
 	bezier.set_point_position(1, mid_pos)
@@ -108,17 +109,22 @@ func _draw_bezier():
 	var direction = (end_pos - start_pos).normalized()
 	bezier.set_point_in(1, direction * -0.2 * distance)
 	bezier.set_point_out(1, direction * 0.2 * distance)
+	
+	bezier.set_bake_interval(distance / curve_edges)
 
 
 # Give the points of the curve to the ImmediateGeometry-Node which do the visualization
 func _visualize():
-	visualizer.clear()
-	visualizer.begin(Mesh.PRIMITIVE_LINE_STRIP)
-
-	for vertex in bezier.get_baked_points():
-		visualizer.add_vertex(vertex)
-
-	visualizer.end()
+#	visualizer.clear()
+#	visualizer.begin(Mesh.PRIMITIVE_LINE_STRIP)
+#
+#	for vertex in bezier.get_baked_points():
+#		visualizer.add_vertex(vertex)
+#
+#	visualizer.end()
+	
+	
+	visualizer.points = bezier.get_baked_points()
 
 
 # Because we need to have 3 points to draw the bezier we have to initialize them
