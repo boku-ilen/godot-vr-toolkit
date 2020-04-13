@@ -1,6 +1,9 @@
 extends RigidBody
 class_name  InteractableObject
 
+export(bool) var fixed_position = false
+export(Transform) var position_in_hand = Transform.IDENTITY
+
 onready var original_parent = get_parent()
 
 var controller_id: int

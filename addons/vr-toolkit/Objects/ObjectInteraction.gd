@@ -26,11 +26,13 @@ func _process(delta):
 	last_position = global_transform.origin
 	# If we are currently holding an object we will translate it with the controller
 	if current_object:
-		current_object.global_transform.origin = global_transform.origin
-		# Apply the rotation since the object has been picked up
-		current_object.global_transform.basis = global_transform.basis * original_object_transform.basis
-		# Prevent floating point inaccuracy 
-		current_object.global_transform = current_object.global_transform.orthonormalized()
+		if not current_object.fixed_position:
+			current_object.global_transform.origin = global_transform.origin
+			# Apply the rotation since the object has been picked up
+			current_object.global_transform.basis = global_transform.basis * original_object_transform.basis
+		else:
+			current_object.global_transform.origin = global_transform.origin + current_object.position_in_hand.origin
+			current_object.global_transform.basis = current_object.position_in_hand.basis * global_transform.basis
 
 
 func on_interact(pressed):
@@ -47,16 +49,15 @@ func on_pickup(pressed: bool):
 	if pressed:
 		current_object = _try_pick_up_closest_interactable()
 		if not current_object == null:
-			# As sometimes it is practicable to set the rigidbodies to sleeping
-			# so they stay in position, disable this now.
-			current_object.set_sleeping(false)
-			# Save the transform of the object when it was taken, we need this 
-			# to accurately compute the transform with the rotation of the controller
-			original_object_transform = current_object.global_transform
-			# Reset the basis of global_transform to Identity so only the rotation
-			# from the moment it has been picked up will be applied, not the rotation
-			# that the controller already has when picking up
-			global_transform.basis = Basis.IDENTITY
+			# Only if fixed position of the object is not enabled.
+			if not current_object.fixed_position:
+				# Save the transform of the object when it was taken, we need this 
+				# to accurately compute the transform with the rotation of the controller
+				original_object_transform = current_object.global_transform
+				# Reset the basis of global_transform to Identity so only the rotation
+				# from the moment it has been picked up will be applied, not the rotation
+				# that the controller already has when picking up
+				global_transform.basis = Basis.IDENTITY
 	else:
 	# If we are no longer holding the object we will call for its dropped method 
 	# and set the current_object to null
