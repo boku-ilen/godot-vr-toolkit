@@ -8,6 +8,8 @@ export(float) var cast_height = 6
 export(int) var curve_edges = 30
 export(Color) var can_teleport = Color.green
 export(Color) var cannot_teleport = Color.red
+export(SpatialMaterial) var line_material = SpatialMaterial.new()
+export(SpatialMaterial) var indicator_material = SpatialMaterial.new()
 
 onready var horizontal_ray = get_node("HorizontalRay")
 # Remote transform does not work, thus we make a node to undock it from the controller.
@@ -18,7 +20,7 @@ onready var visualizer = get_node("Node/LineRenderer")
 onready var bezier = Curve3D.new()
 
 var horizontal_point: Vector3
-export(SpatialMaterial) var visualizer_material = SpatialMaterial.new()
+
 
 
 func _ready():
@@ -26,8 +28,8 @@ func _ready():
 	horizontal_ray.enabled = true
 	$Inputs/TeleportInput.connect("pressed", self, "on_teleport")
 	
-	visualizer.set_material_override(visualizer_material)
-	position_indicator.set_material_override(visualizer_material)
+	visualizer.set_material_override(line_material)
+	position_indicator.set_material_override(indicator_material)
 	_init_bezier()
 
 
@@ -43,13 +45,23 @@ func _process(delta):
 
 	if tall_ray.is_colliding():
 		position_indicator.visible = true
-		position_indicator.global_transform.origin = tall_ray.get_collision_point()
-		visualizer_material.albedo_color = can_teleport
-		visualizer_material.emission = can_teleport
+		
+		var collision_plane = Plane(tall_ray.get_collision_normal(), 0)
+		var new_up = tall_ray.get_collision_normal()
+		var new_forward = collision_plane.project(tall_ray.get_collision_point() - global_transform.origin).normalized()
+		var new_right = new_forward.cross(new_up)
+		position_indicator.global_transform = Transform(new_right, new_up, -new_forward, tall_ray.get_collision_point())
+		
+		indicator_material.albedo_color = can_teleport
+		line_material.albedo_color = can_teleport
+		indicator_material.emission = can_teleport
+		line_material.emission = can_teleport
 	else:
 		position_indicator.visible = false
-		visualizer_material.albedo_color = cannot_teleport
-		visualizer_material.emission = cannot_teleport
+		indicator_material.albedo_color = cannot_teleport
+		line_material.albedo_color = cannot_teleport
+		indicator_material.emission = cannot_teleport
+		line_material.emission = cannot_teleport
 
 	_draw_bezier()
 	visualizer.points = bezier.get_baked_points()

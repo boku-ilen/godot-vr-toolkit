@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/vr-toolkit/Locomotion/RayTeleport.gd" type="Script" id=1]
 [ext_resource path="res://addons/godot-openvr/OpenVRAction.gdns" type="Script" id=2]
 [ext_resource path="res://addons/vr-toolkit/Util/LineRenderer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/vr-toolkit/Resources/footprints.png" type="Texture" id=4]
 [ext_resource path="res://addons/vr-toolkit/Resources/teleport_texture.png" type="Texture" id=5]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=30]
 flags_transparent = true
 vertex_color_use_as_albedo = true
 albedo_color = Color( 1, 0, 0, 1 )
@@ -16,24 +17,29 @@ emission_energy = 4.44
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="SphereMesh" id=2]
-radius = 0.2
-height = 0.4
+[sub_resource type="SpatialMaterial" id=31]
+flags_transparent = true
+albedo_color = Color( 0.101961, 1, 0, 1 )
+albedo_texture = ExtResource( 4 )
+uv1_triplanar_sharpness = 0.999998
 
-[sub_resource type="SpatialMaterial" id=3]
-emission_enabled = true
-emission = Color( 1, 0.627451, 0.882353, 1 )
-emission_energy = 1.0
-emission_operator = 0
-emission_on_uv2 = false
-transmission_enabled = true
-transmission = Color( 1, 0, 0.984314, 1 )
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+flags_unshaded = true
+albedo_color = Color( 0.101961, 1, 0, 1 )
+albedo_texture = ExtResource( 4 )
+uv1_triplanar_sharpness = 0.999998
+
+[sub_resource type="PlaneMesh" id=3]
+material = SubResource( 2 )
+size = Vector2( 0.7, 0.6 )
 
 [node name="RayTeleport" type="Spatial"]
 script = ExtResource( 1 )
 min_pitch = -160.0
 max_distance = 200.0
-visualizer_material = SubResource( 1 )
+line_material = SubResource( 30 )
+indicator_material = SubResource( 31 )
 
 [node name="HorizontalRay" type="RayCast" parent="."]
 enabled = true
@@ -41,8 +47,8 @@ cast_to = Vector3( 0, 0, -500 )
 collide_with_areas = true
 
 [node name="PositionIndicator" type="MeshInstance" parent="."]
-mesh = SubResource( 2 )
-material/0 = SubResource( 3 )
+mesh = SubResource( 3 )
+material/0 = null
 
 [node name="Node" type="Node" parent="."]
 
