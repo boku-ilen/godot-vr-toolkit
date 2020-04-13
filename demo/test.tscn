@@ -100,6 +100,18 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.418256, 0 )
 shape = SubResource( 2 )
 
+[node name="StaticBody6" type="StaticBody" parent="Platforms"]
+transform = Transform( 0.842622, -0.538506, 0, 0.538506, 0.842622, 0, 0, 0, 1, 13.7561, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Platforms/StaticBody6"]
+transform = Transform( 5, 0, 0, 0, 0.5, 0, 0, 0, 5, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Platforms/StaticBody6"]
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.418256, 0 )
+shape = SubResource( 2 )
+
 [node name="StaticBody2" type="StaticBody" parent="Platforms"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -63.0983, 19.1779, 0 )
 
@@ -183,14 +195,39 @@ shape = SubResource( 29 )
 [node name="PlayerVR" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91246, 0 )
 enable_controller_left = true
-enable_controller_right = true
 enable_hand_left = true
 enable_hand_right = true
+
+[node name="ARVRCamera" parent="PlayerVR" index="0"]
+transform = Transform( 0.792223, -0.0012482, -0.61023, -0.160304, 0.964452, -0.210085, 0.5888, 0.264257, 0.763861, 0.3829, 1.25259, -0.166781 )
+
+[node name="Index" parent="PlayerVR/Left/Tip/Gestures/HandDefault/Armature/Skeleton" index="1"]
+transform = Transform( 0.975734, 0.196838, -0.0959022, -0.196604, 0.98041, 0.0119764, 0.0963809, 0.00716901, 0.995319, 0.700328, 2.98927, 0.0458557 )
+
+[node name="Middle" parent="PlayerVR/Left/Tip/Gestures/HandDefault/Armature/Skeleton" index="2"]
+transform = Transform( 0.995332, 0.00108562, -0.0965034, 0.00876084, 0.994792, 0.10155, 0.096111, -0.101921, 0.990139, 0.0819126, 3.26059, 0.0746803 )
+
+[node name="Ring" parent="PlayerVR/Left/Tip/Gestures/HandDefault/Armature/Skeleton" index="3"]
+transform = Transform( 0.993798, -0.069105, -0.0871155, 0.0660753, 0.997121, -0.0371972, 0.0894351, 0.0312103, 0.995503, -0.365534, 3.01288, 0.0325711 )
+
+[node name="Pinky" parent="PlayerVR/Left/Tip/Gestures/HandDefault/Armature/Skeleton" index="4"]
+transform = Transform( 0.953953, -0.291652, -0.0700865, 0.279839, 0.949468, -0.142126, 0.107996, 0.115969, 0.987364, -1.03916, 2.54156, 0.0419393 )
+
+[node name="Thumb" parent="PlayerVR/Left/Tip/Gestures/HandDefault/Armature/Skeleton" index="5"]
+transform = Transform( 0.648066, 0.743594, -0.0195462, -0.755588, 0.641447, 0.107047, 0.0943398, 0.102737, 0.99412, 1.41893, 1.36373, 0.085356 )
+
+[node name="Raw" parent="PlayerVR/Right" index="1"]
+action = ""
+on_hand = 0
 
 [node name="GuiInteraction" parent="PlayerVR/Right/Tip" index="1" instance=ExtResource( 12 )]
 
 [node name="LeftVisual" parent="PlayerVR" index="3"]
-transform = Transform( 0.302541, 0.707644, -0.638523, -0.163623, 0.698531, 0.696623, 0.938989, -0.106281, 0.32712, 0.270139, 0.895006, -0.793497 )
+transform = Transform( -0.44268, 0.70426, -0.555031, -0.0521123, 0.597729, 0.800004, 0.895167, 0.383067, -0.227903, 0.387807, 0.64844, -0.182539 )
+
+[node name="RightVisual" parent="PlayerVR" index="4"]
+transform = Transform( 0.256764, -0.852582, 0.45517, 0.0065492, 0.472481, 0.881318, -0.966454, -0.223311, 0.126899, 0.351315, 0.667755, -0.107106 )
+show_controller_mesh = false
 
 [node name="Compass" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00404, -1.5636 )
@@ -253,6 +290,8 @@ shape = SubResource( 32 )
 
 [node name="Spatial" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.32514, -1.47501 )
+fixed_position = true
+position_in_hand = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.05 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 21 )
@@ -264,6 +303,10 @@ environment = SubResource( 21 )
 [editable path="PlayerVR"]
 
 [editable path="PlayerVR/Left"]
+
+[editable path="PlayerVR/Left/Tip/Gestures"]
+
+[editable path="PlayerVR/Left/Tip/Gestures/HandDefault"]
 
 [editable path="PlayerVR/Right"]
 

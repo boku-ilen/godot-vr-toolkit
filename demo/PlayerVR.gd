@@ -42,6 +42,10 @@ func set_enable_hand_right(is_visible):
 
 
 func _ready():
+	set_enable_controller_left(enable_hand_left)
+	set_enable_controller_right(enable_hand_right)
+	set_enable_hand_left(enable_hand_left)
+	set_enable_hand_right(enable_hand_right)
 	GlobalVRAccess.controller_id_dict[controller_left.controller_id] = controller_left
 	GlobalVRAccess.controller_id_dict[controller_right.controller_id] = controller_right
 	
