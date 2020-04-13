@@ -1,7 +1,8 @@
 extends "res://addons/vr-toolkit/Controller/ControllerTool.gd"
 
 export(float) var ray_length = 100
-export(SpatialMaterial) var visualizer_material = SpatialMaterial.new()
+export(SpatialMaterial) var line_material = SpatialMaterial.new()
+export(SpatialMaterial) var indicator_material = SpatialMaterial.new()
 export(float) var point_radius = 0.04
 export(bool) var enabled = true
 
@@ -17,11 +18,10 @@ func _ready():
 	$Inputs/InteractInput.connect("pressed", self, "interact", [true])
 	$Inputs/InteractInput.connect("released", self, "interact", [false])
 	
-	line_visualizer.set_material_override(visualizer_material)
+	line_visualizer.set_material_override(line_material)
 	
-	point_visualizer.set_material_override(visualizer_material)
-	point_visualizer.mesh.radius = point_radius
-	point_visualizer.mesh.height = point_radius * 2
+	point_visualizer.set_material_override(indicator_material)
+	point_visualizer.mesh.size = Vector2(point_radius, point_radius)
 	
 	interact_ray.set_cast_to(-(transform.basis.z) * ray_length)
 	
@@ -37,7 +37,12 @@ func _process(delta):
 			# The point should not be visible if anything other than a UI-Element is hit, thus
 			# I made the ray so it only collides with the specific collision mask of VRGui
 			point_visualizer.set_visible(true)
-			point_visualizer.global_transform.origin = interact_ray.get_collision_point()
+			
+			var collision_plane = Plane(interact_ray.get_collision_normal(), 0)
+			var new_up = interact_ray.get_collision_normal()
+			var new_forward = collision_plane.project(interact_ray.get_collision_point() - global_transform.origin).normalized()
+			var new_right = new_forward.cross(new_up)
+			point_visualizer.global_transform = Transform(new_right, new_up, -new_forward, interact_ray.get_collision_point())
 			
 			# The line should end where the ray collides - thus we find the 
 			# distance from the start point colliding point and with it we multiply forward
