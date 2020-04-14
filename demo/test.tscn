@@ -291,7 +291,7 @@ shape = SubResource( 32 )
 [node name="Spatial" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.32514, -1.47501 )
 fixed_position = true
-position_in_hand = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.05 )
+position_in_hand = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.2 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 21 )
