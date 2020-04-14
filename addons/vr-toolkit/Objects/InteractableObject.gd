@@ -8,7 +8,7 @@ onready var original_parent = get_parent()
 
 var controller_id: int
 var object_interaction
-var _is_picked_up: bool = false
+var is_picked_up: bool = false
 var _is_interacting: bool = false
 
 
@@ -31,7 +31,7 @@ func interact_end():
 func picked_up(my_controller: int, my_interactor):
 	controller_id =  my_controller
 	object_interaction = my_interactor
-	_is_picked_up = true
+	is_picked_up = true
 
 
 # This happens when the pick-up-button is released on the current controller
@@ -43,4 +43,4 @@ func dropped(velocity: Vector3):
 	
 	controller_id = 0
 	object_interaction = null
-	_is_picked_up = false
+	is_picked_up = false

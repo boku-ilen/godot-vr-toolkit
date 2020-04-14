@@ -7,6 +7,8 @@ onready var area = get_node("Area")
 var current_object: InteractableObject = null
 # The initial transform of the object when picking up
 var original_object_transform: Transform = Transform.IDENTITY
+# The initial node the object was child of
+var original_parent: Spatial = null
 var last_position = Vector3(0.0, 0.0, 0.0)
 var velocities = Array()
 
@@ -30,9 +32,6 @@ func _process(delta):
 			current_object.global_transform.origin = global_transform.origin
 			# Apply the rotation since the object has been picked up
 			current_object.global_transform.basis = global_transform.basis * original_object_transform.basis
-		else:
-			current_object.global_transform.origin = global_transform.origin + current_object.position_in_hand.origin
-			current_object.global_transform.basis = current_object.position_in_hand.basis * global_transform.basis
 
 
 func on_interact(pressed):
@@ -58,10 +57,23 @@ func on_pickup(pressed: bool):
 				# from the moment it has been picked up will be applied, not the rotation
 				# that the controller already has when picking up
 				global_transform.basis = Basis.IDENTITY
+			else:
+				global_transform.basis = get_parent().global_transform.basis
+				current_object.original_parent.remove_child(current_object)
+				current_object.mode = RigidBody.MODE_KINEMATIC
+				add_child(current_object)
+				current_object.transform = transform * current_object.position_in_hand
 	else:
 	# If we are no longer holding the object we will call for its dropped method 
 	# and set the current_object to null
 		if current_object:
+			if current_object.fixed_position:
+				var glob_transform = current_object.global_transform
+				remove_child(current_object)
+				current_object.original_parent.add_child(current_object)
+				current_object.global_transform = glob_transform
+				current_object.mode = RigidBody.MODE_RIGID
+			
 			current_object.dropped(_get_velocity())
 			current_object = null
 
