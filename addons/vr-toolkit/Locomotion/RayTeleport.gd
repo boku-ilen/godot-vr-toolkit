@@ -17,6 +17,7 @@ onready var horizontal_ray = get_node("HorizontalRay")
 onready var tall_ray = get_node("Node/TallRay")
 onready var position_indicator = get_node("PositionIndicator")
 onready var visualizer = get_node("Node/LineRenderer")
+onready var input = get_node("Inputs/TeleportInput")
 onready var bezier = Curve3D.new()
 
 var horizontal_point: Vector3
@@ -26,7 +27,7 @@ var horizontal_point: Vector3
 func _ready():
 	tall_ray.enabled = true
 	horizontal_ray.enabled = true
-	$Inputs/TeleportInput.connect("pressed", self, "on_teleport")
+	input.connect("released", self, "on_teleport")
 	
 	visualizer.set_material_override(line_material)
 	position_indicator.set_material_override(indicator_material)
@@ -39,32 +40,38 @@ func on_teleport():
 
 
 func _process(delta):
-	tall_ray.global_transform.origin = origin.global_transform.origin + Vector3.UP * cast_height
-	_find_horizontal_point()
-	_find_cast_position()
-
-	if tall_ray.is_colliding():
-		position_indicator.visible = true
-		
-		var collision_plane = Plane(tall_ray.get_collision_normal(), 0)
-		var new_up = tall_ray.get_collision_normal()
-		var new_forward = collision_plane.project(tall_ray.get_collision_point() - global_transform.origin).normalized()
-		var new_right = new_forward.cross(new_up)
-		position_indicator.global_transform = Transform(new_right, new_up, -new_forward, tall_ray.get_collision_point())
-		
-		indicator_material.albedo_color = can_teleport
-		line_material.albedo_color = can_teleport
-		indicator_material.emission = can_teleport
-		line_material.emission = can_teleport
+	if input.get_analog().x > 0.2:
+		visualizer.show()
+		show()
+		tall_ray.global_transform.origin = origin.global_transform.origin + Vector3.UP * cast_height
+		_find_horizontal_point()
+		_find_cast_position()
+	
+		if tall_ray.is_colliding():
+			position_indicator.visible = true
+			
+			var collision_plane = Plane(tall_ray.get_collision_normal(), 0)
+			var new_up = tall_ray.get_collision_normal()
+			var new_forward = collision_plane.project(tall_ray.get_collision_point() - global_transform.origin).normalized()
+			var new_right = new_forward.cross(new_up)
+			position_indicator.global_transform = Transform(new_right, new_up, -new_forward, tall_ray.get_collision_point())
+			
+			indicator_material.albedo_color = can_teleport
+			line_material.albedo_color = can_teleport
+			indicator_material.emission = can_teleport
+			line_material.emission = can_teleport
+		else:
+			position_indicator.visible = false
+			indicator_material.albedo_color = cannot_teleport
+			line_material.albedo_color = cannot_teleport
+			indicator_material.emission = cannot_teleport
+			line_material.emission = cannot_teleport
+	
+		_draw_bezier()
+		visualizer.points = bezier.get_baked_points()
 	else:
-		position_indicator.visible = false
-		indicator_material.albedo_color = cannot_teleport
-		line_material.albedo_color = cannot_teleport
-		indicator_material.emission = cannot_teleport
-		line_material.emission = cannot_teleport
-
-	_draw_bezier()
-	visualizer.points = bezier.get_baked_points()
+		visualizer.hide()
+		hide()
 
 
 # Finds the maximum distance along the horizontal ray
