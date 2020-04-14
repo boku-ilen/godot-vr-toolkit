@@ -40,10 +40,6 @@ config/icon="res://icon.png"
 
 GlobalVRAccess="*res://addons/vr-toolkit/GlobalVRAccess.gd"
 
-[editor_plugins]
-
-enabled=PoolStringArray( "vr-toolkit" )
-
 [gdnative]
 
 singletons=[ "res://addons/godot-openvr/godot_openvr.gdnlib" ]
