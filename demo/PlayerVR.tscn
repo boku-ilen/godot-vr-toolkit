@@ -15,6 +15,10 @@ action_json_path = "res://addons/vr-toolkit/Controller/actions-toolkit.json"
 default_action_set = "/actions/godot_ingame"
 vr_menu = ExtResource( 5 )
 objects_menu = ExtResource( 6 )
+show_controller_left = true
+show_controller_right = true
+show_hand_left = true
+show_hand_right = true
 
 [node name="ARVRCamera" type="ARVRCamera" parent="."]
 transform = Transform( 0.835603, -0.152514, -0.527738, 0.00346618, 0.962132, -0.272563, 0.549323, 0.225925, 0.804488, 0.283994, 1.25431, -0.0914008 )
@@ -49,10 +53,8 @@ on_hand = 2
 [node name="ObjectInteraction" parent="Right/Tip" index="1" instance=ExtResource( 8 )]
 
 [node name="LeftVisual" parent="." instance=ExtResource( 1 )]
-transform = Transform( -0.827234, 0.454567, -0.330244, -0.0758034, 0.492097, 0.867235, 0.556728, 0.742436, -0.372624, 0.377803, 0.644683, -0.171194 )
 
 [node name="RightVisual" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.414081, -0.819101, 0.397004, 0.169413, 0.497882, 0.850538, -0.894337, -0.284935, 0.34493, 0.355576, 0.670598, -0.118187 )
 controller_id = 2
 
 [editable path="Left"]

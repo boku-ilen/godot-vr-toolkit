@@ -23,22 +23,22 @@ var interface
 
 func set_show_controller_left(is_visible):
 	show_controller_left = is_visible
-	get_node("LeftVisual").show_controller_mesh = show_controller_left
+	#get_node("LeftVisual").show_controller_mesh = show_controller_left
 
 
 func set_show_controller_right(is_visible):
 	show_controller_right = is_visible
-	get_node("RightVisual").show_controller_mesh = show_controller_right
+	#get_node("RightVisual").show_controller_mesh = show_controller_right
 
 
 func set_show_hand_left(is_visible):
 	show_hand_left = is_visible
-	get_node("Left/Tip/Gestures").visible = show_hand_left
+	#get_node("Left/Tip/Gestures").visible = show_hand_left
 
 
 func set_show_hand_right(is_visible):
 	show_hand_right = is_visible
-	get_node("Right/Tip/Gestures").visible = show_hand_right
+	#get_node("Right/Tip/Gestures").visible = show_hand_right
 
 
 func set_show_meshes(side: int, show_controller: bool, show_hand: bool):
@@ -58,10 +58,15 @@ func get_show_meshes(side: int):
 
 
 func _ready():
-	set_show_controller_left(show_hand_left)
-	set_show_controller_right(show_hand_right)
-	set_show_hand_left(show_hand_left)
-	set_show_hand_right(show_hand_right)
+	#set_show_controller_left(show_hand_left)
+	#set_show_controller_right(show_hand_right)
+	#set_show_hand_left(show_hand_left)
+	#set_show_hand_right(show_hand_right)
+	controller_left.show_controller_mesh = show_controller_left
+	controller_right.show_controller_mesh = show_controller_right
+	hand_left.visible = show_hand_left
+	hand_right.visible = show_hand_right
+	
 	GlobalVRAccess.controller_id_dict[controller_left.controller_id] = controller_left
 	GlobalVRAccess.controller_id_dict[controller_right.controller_id] = controller_right
 	
