@@ -1,8 +1,8 @@
-extends RigidBody
-class_name  InteractableObject
+extends KinematicBody
+class_name VRStaticInteractable
 
-export(bool) var fixed_position = false
-export(Transform) var position_in_hand = Transform.IDENTITY
+# When picked up hide the hand/controller mesh
+export(bool) var show_controller_hand_meshes = true
 
 onready var original_parent = get_parent()
 
@@ -23,24 +23,23 @@ func interact():
 	_is_interacting = true
 
 
+# This happens when interaction-button is released
 func interact_end():
 	_is_interacting = false
 
 
 # This happens when the pick-up-button is pressed on the current controller
-func picked_up(my_controller: int, my_interactor):
+func pick(my_controller: int, my_interactor):
 	controller_id =  my_controller
 	object_interaction = my_interactor
 	is_picked_up = true
 
 
 # This happens when the pick-up-button is released on the current controller
-# Get the current position and wait two physics-frames (so it is not frame dependent)
-# then check for the position again. The direction will be the difference of those two positions
-func dropped(velocity: Vector3):
-	if not object_interaction == null:
-		set_linear_velocity(velocity)
-	
+func omitted():
 	controller_id = 0
 	object_interaction = null
 	is_picked_up = false
+
+
+func get_class(): return "VRStaticInteractable"
