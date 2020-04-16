@@ -66,5 +66,4 @@ scaleTexture = false
 
 [node name="TeleportInput" type="Node" parent="Inputs"]
 script = ExtResource( 2 )
-pressed_action = "/actions/godot_ingame/in/trigger"
-analog_action = "/actions/godot_ingame/in/analog_trigger"
+pressed_action = "/actions/godot_ingame/in/button_by"

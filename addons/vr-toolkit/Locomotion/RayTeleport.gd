@@ -40,7 +40,7 @@ func on_teleport():
 
 
 func _process(delta):
-	if input.get_analog().x > 0.2:
+	if input.is_pressed():
 		visualizer.show()
 		show()
 		tall_ray.global_transform.origin = origin.global_transform.origin + Vector3.UP * cast_height
