@@ -6,6 +6,7 @@ onready var area = get_node("Area")
 
 # The picked up object
 var current_object = null
+var picked_up: bool = false
 # The initial transform of the object when picking up
 var original_object_transform: Transform = Transform.IDENTITY
 # The initial node the object was child of
@@ -46,13 +47,15 @@ func on_pickup(pressed: bool):
 		if not current_object == null:
 			# If not static object
 			if current_object.get_class() == "VRInteractable":
-				pick_up()
+				if pick_up():
+					picked_up = true
 			elif current_object.get_class() == "VRStaticInteractable":
 				current_object.pick(controller_id, self)
+				picked_up = true
 	else:
 	# If we are no longer holding the object we will call for its dropped method 
 	# and set the current_object to null
-		if current_object:
+		if picked_up and current_object:
 			if current_object.get_class() == "VRInteractable":
 				drop()
 				
@@ -60,6 +63,8 @@ func on_pickup(pressed: bool):
 				origin.set_show_meshes(controller_id, original_meshes.hand, original_meshes.controller)
 			elif current_object.get_class() == "VRStaticInteractable":
 				current_object.omitted()
+			
+			picked_up = false
 			
 			current_object = null
 
@@ -83,7 +88,7 @@ func pick_up():
 		add_child(current_object)
 		current_object.picked_up(controller_id, self)
 	else:
-		return
+		return false
 	
 	# If hide meshes is checked, hide hand and controller mesh, save original state for showing them again
 	original_meshes = origin.get_show_meshes(controller_id)
@@ -98,6 +103,8 @@ func pick_up():
 		# If it has a fixed position reset the transform, so it does have the same position
 		global_transform.basis = get_parent().global_transform.basis
 		current_object.transform = transform * current_object.position_in_hand
+	
+	return true
 
 
 func drop():
