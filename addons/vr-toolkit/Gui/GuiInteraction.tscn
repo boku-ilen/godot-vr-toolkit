@@ -41,6 +41,7 @@ collide_with_areas = true
 [node name="LineRenderer" parent="." instance=ExtResource( 3 )]
 startThickness = 0.002
 endThickness = 0.002
+drawCaps = false
 globalCoords = false
 
 [node name="Node" type="Node" parent="."]
