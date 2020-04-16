@@ -14,20 +14,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/vr-toolkit/Controller/ControllerTool.gd"
 }, {
-"base": "RigidBody",
-"class": "InteractableObject",
-"language": "GDScript",
-"path": "res://addons/vr-toolkit/Objects/InteractableObject.gd"
-}, {
 "base": "Control",
 "class": "VRGuiElement",
 "language": "GDScript",
 "path": "res://addons/vr-toolkit/Gui/GuiElement.gd"
+}, {
+"base": "RigidBody",
+"class": "VRInteractable",
+"language": "GDScript",
+"path": "res://addons/vr-toolkit/Objects/VRInteractable.gd"
+}, {
+"base": "KinematicBody",
+"class": "VRStaticInteractable",
+"language": "GDScript",
+"path": "res://addons/vr-toolkit/Objects/VRStaticInteractable.gd"
 } ]
 _global_script_class_icons={
 "ControllerTool": "",
-"InteractableObject": "",
-"VRGuiElement": ""
+"VRGuiElement": "",
+"VRInteractable": "",
+"VRStaticInteractable": ""
 }
 
 [application]

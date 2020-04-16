@@ -1,4 +1,4 @@
-extends InteractableObject
+extends VRInteractable
 
 
 onready var laser = get_node("Laser")
@@ -16,7 +16,7 @@ func _process(delta):
 		if laser.is_colliding():
 			ui.distance = translation.distance_to(laser.get_collision_point())
 		else:
-			ui.distance = "other"
+			ui.distance = "No collision detected"
 
 
 func draw_line(var begin: Vector3, var end: Vector3):

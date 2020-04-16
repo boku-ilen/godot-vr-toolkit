@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://demo/InteractableObjects/DistanceMeasurement/DistanceMeasurer.gd" type="Script" id=1]
 [ext_resource path="res://addons/vr-toolkit/Gui/GuiToMesh.tscn" type="PackedScene" id=2]
@@ -14,20 +14,23 @@ size = Vector3( 0.1, 0.2, 0.1 )
 resource_local_to_scene = true
 size = Vector2( 0.2, 0.2 )
 
-[sub_resource type="ViewportTexture" id=7]
+[sub_resource type="ViewportTexture" id=4]
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="SpatialMaterial" id=5]
 flags_transparent = true
 flags_unshaded = true
-albedo_texture = SubResource( 7 )
+albedo_texture = SubResource( 4 )
 
-[sub_resource type="CubeMesh" id=4]
+[sub_resource type="CubeMesh" id=6]
 size = Vector3( 0.2, 0.2, 0.01 )
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="BoxShape" id=8]
 extents = Vector3( 0.0524242, 0.100746, 0.251612 )
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=9]
 albedo_color = Color( 1, 0, 0, 1 )
 emission_enabled = true
 emission = Color( 1, 0, 0, 1 )
@@ -53,22 +56,22 @@ transform = Transform( 1, 0, 0, 0, 0.69116, 0.722702, 0, -0.722702, 0.69116, 0, 
 [node name="GuiToMesh" parent="Display" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, -8.9407e-08, -1, 0, 1, -8.9407e-08, 0, 1.49012e-08, -0.009 )
 mesh = SubResource( 3 )
-material/0 = SubResource( 8 )
+material/0 = SubResource( 5 )
 viewport_element = ExtResource( 4 )
 mesh_size = Vector2( 0.2, 0.2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Display"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0155001 )
-mesh = SubResource( 4 )
-material/0 = null
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0522866, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 
 [node name="Laser" type="RayCast" parent="."]
 enabled = true
 cast_to = Vector3( 0, 0, -1000 )
 
 [node name="ImmediateGeometry" type="ImmediateGeometry" parent="."]
-material_override = SubResource( 6 )
+material_override = SubResource( 9 )

@@ -1,4 +1,4 @@
-extends InteractableObject
+extends VRInteractable
 
 export(float) var pew_jectile_speed = 100
 

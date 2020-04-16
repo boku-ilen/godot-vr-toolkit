@@ -1,4 +1,4 @@
-extends InteractableObject
+extends VRInteractable
 
 #
 # A compass indicating the orientation of the firstPerson.

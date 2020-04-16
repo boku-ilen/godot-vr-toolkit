@@ -1,4 +1,4 @@
-extends InteractableObject
+extends VRInteractable
 
 
 # Declare member variables here. Examples:
