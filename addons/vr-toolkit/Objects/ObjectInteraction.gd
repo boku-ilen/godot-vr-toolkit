@@ -23,7 +23,7 @@ func _ready():
 	$Inputs/InteractInput.connect("released", self, "on_interact", [false])
 
 
-func _process(delta):
+func _physics_process(delta):
 	velocities.push_back((global_transform.origin - last_position) / delta)
 	if velocities.size() > velocity_samples:
 		velocities.pop_front()
