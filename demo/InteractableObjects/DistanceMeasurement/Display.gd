@@ -16,6 +16,8 @@ func set_distance(value):
 	distance = value
 	if distance is float or distance is int:
 		$VBoxContainer/Distance.text = String(distance * conversion_factor)
+	else:
+		$VBoxContainer/Distance.text = value
 
 
 func get_distance():
@@ -28,7 +30,8 @@ func is_pressed(pressed):
 
 func set_conversion(factor: float):
 	conversion_factor = factor
-	if get_distance() is float or get_distance() is int:
+	distance = get_distance()
+	if distance is float or distance is int:
 		$VBoxContainer/Distance.text = String(get_distance() * conversion_factor)
 
 
