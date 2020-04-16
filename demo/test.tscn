@@ -187,21 +187,6 @@ show_hand_right = true
 [node name="ARVRCamera" parent="PlayerVR" index="0"]
 transform = Transform( 0.792223, -0.0012482, -0.61023, -0.160304, 0.964452, -0.210085, 0.5888, 0.264257, 0.763861, 0.3829, 1.25259, -0.166781 )
 
-[node name="Index" parent="PlayerVR/Left/Tip/Gestures/HandDefault/Armature/Skeleton" index="1"]
-transform = Transform( 0.975734, 0.196838, -0.0959022, -0.196604, 0.98041, 0.0119764, 0.0963809, 0.00716901, 0.995319, 0.700328, 2.98927, 0.0458557 )
-
-[node name="Middle" parent="PlayerVR/Left/Tip/Gestures/HandDefault/Armature/Skeleton" index="2"]
-transform = Transform( 0.995332, 0.00108562, -0.0965034, 0.00876084, 0.994792, 0.10155, 0.096111, -0.101921, 0.990139, 0.0819126, 3.26059, 0.0746803 )
-
-[node name="Ring" parent="PlayerVR/Left/Tip/Gestures/HandDefault/Armature/Skeleton" index="3"]
-transform = Transform( 0.993798, -0.069105, -0.0871155, 0.0660753, 0.997121, -0.0371972, 0.0894351, 0.0312103, 0.995503, -0.365534, 3.01288, 0.0325711 )
-
-[node name="Pinky" parent="PlayerVR/Left/Tip/Gestures/HandDefault/Armature/Skeleton" index="4"]
-transform = Transform( 0.953953, -0.291652, -0.0700865, 0.279839, 0.949468, -0.142126, 0.107996, 0.115969, 0.987364, -1.03916, 2.54156, 0.0419393 )
-
-[node name="Thumb" parent="PlayerVR/Left/Tip/Gestures/HandDefault/Armature/Skeleton" index="5"]
-transform = Transform( 0.648066, 0.743594, -0.0195462, -0.755588, 0.641447, 0.107047, 0.0943398, 0.102737, 0.99412, 1.41893, 1.36373, 0.085356 )
-
 [node name="ObjectInteraction" parent="PlayerVR/Left/Tip" index="2"]
 velocity_samples = 10
 
@@ -209,7 +194,11 @@ velocity_samples = 10
 action = ""
 on_hand = 0
 
+[node name="GuiFinger" parent="PlayerVR/Right/Tip/Gestures/HandDefault/Armature/Skeleton/Index" index="0"]
+enabled = false
+
 [node name="GuiInteraction" parent="PlayerVR/Right/Tip" index="1" instance=ExtResource( 12 )]
+enabled = false
 
 [node name="ObjectInteraction" parent="PlayerVR/Right/Tip" index="2"]
 velocity_samples = 10
@@ -328,5 +317,9 @@ mesh = SubResource( 22 )
 [editable path="PlayerVR/Left/Tip/Gestures/HandDefault"]
 
 [editable path="PlayerVR/Right"]
+
+[editable path="PlayerVR/Right/Tip/Gestures"]
+
+[editable path="PlayerVR/Right/Tip/Gestures/HandDefault"]
 
 [editable path="Util/Spatial"]
