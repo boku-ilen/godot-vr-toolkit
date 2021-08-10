@@ -21,16 +21,16 @@ height = 0.0612723
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
 script = ExtResource( 2 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="CompassMesh" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 3 )
 
-[node name="Spatial" type="Spatial" parent="."]
+[node name="CompassPlate" type="Spatial" parent="."]
 
-[node name="CompassSymbol" type="Sprite3D" parent="Spatial"]
+[node name="CompassSymbol" type="Sprite3D" parent="CompassPlate"]
 transform = Transform( 0.045, 0, 0, 0, -1.96701e-09, 1, 0, -0.045, -4.37114e-08, 0, 0.03, 0 )
 layers = 513
 texture = ExtResource( 1 )
