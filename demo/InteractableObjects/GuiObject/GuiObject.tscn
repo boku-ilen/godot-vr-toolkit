@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/vr-toolkit/Gui/GuiToMesh.tscn" type="PackedScene" id=1]
 [ext_resource path="res://demo/ViewportToMesh/UiTest.tscn" type="PackedScene" id=2]
@@ -34,9 +34,6 @@ flags_transparent = true
 flags_unshaded = true
 albedo_texture = SubResource( 5 )
 
-[sub_resource type="BoxShape" id=7]
-extents = Vector3( 0.1, 0.001, 0.1 )
-
 [node name="RigidBody" type="RigidBody"]
 script = ExtResource( 3 )
 
@@ -54,11 +51,3 @@ mesh = SubResource( 4 )
 material/0 = SubResource( 6 )
 viewport_element = ExtResource( 2 )
 mesh_size = Vector2( 0.2, 0.2 )
-
-[node name="Viewport" parent="GuiToMesh" index="0"]
-size = Vector2( 464, 424 )
-
-[node name="CollisionShape" parent="GuiToMesh/Area" index="0"]
-shape = SubResource( 7 )
-
-[editable path="GuiToMesh"]
