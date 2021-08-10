@@ -93,12 +93,6 @@ func _find_cast_position():
 	var cast_position = origin.get_global_transform().origin + Vector3.UP * cast_height
 	var cast_direction = horizontal_point - tall_ray.global_transform.origin
 	
-	# On very high pitches the cast_height has to scale up aswell, otherwise the 
-	# tall_ray's cast_to will almost never collide with anything
-#	var pitch = horizontal_ray.global_transform.basis.get_euler().x
-#	if pitch < 0.8:
-#		cast_position += Vector3.UP * pitch * 50
-
 	tall_ray.global_transform.origin = cast_position
 	tall_ray.cast_to = cast_direction
 
