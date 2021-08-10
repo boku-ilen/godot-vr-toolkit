@@ -1,18 +1,39 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://demo/ViewportToMesh/CameraTest.gd" type="Script" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Camera
 
-[sub_resource type="CapsuleMesh" id=1]
+
+onready var ray = get_node(\"RayCast\")
+onready var mesh = get_node(\"MeshInstance\")
+
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		# Direct the mouse position on the screen along the camera
+		# We use a local ray since it should be relative to the rotation of any parent node
+		var mouse_point_vector = project_local_ray_normal(event.position)
+		
+		# Transform the forward vector to this projected vector (-z is forward)
+		ray.transform.basis.z = -mouse_point_vector
+	elif event is InputEventMouseButton:
+		if event.pressed:
+			print(ray.get_collision_point())
+			mesh.global_transform.origin = ray.get_collision_point()
+	
+"
+
+[sub_resource type="CapsuleMesh" id=2]
 
 [node name="Camera" type="Camera"]
-transform = Transform( -0.710505, -1.23633e-07, 0.703692, 8.7423e-08, -1, -8.7423e-08, 0.703692, -5.95562e-10, 0.710505, 0.287376, 3.26561, -1.19209e-07 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287376, 3.26561, -1.19209e-07 )
 cull_mask = 3
 doppler_tracking = 2
 current = true
 fov = 128.5
 near = 0.01
 far = 70000.0
-script = ExtResource( 1 )
+script = SubResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -20,17 +41,34 @@ __meta__ = {
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, -1.52656e-15, 0, -5.82867e-16, 1, -6.66134e-16, 0, -1.60982e-15, 1, 1.32088, 0.429435, -12.6189 )
 layers = 2
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
-[node name="Button" type="Button" parent="."]
-margin_right = 247.0
-margin_bottom = 136.0
-text = "test"
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, 0, -6000 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 299.0
+margin_bottom = 207.0
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RayCast" type="RayCast" parent="."]
-enabled = true
-cast_to = Vector3( 0, 0, -2000 )
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
+margin_right = 300.0
+margin_bottom = 206.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ColorRect/CenterContainer"]
+margin_left = 14.0
+margin_top = 87.0
+margin_right = 287.0
+margin_bottom = 118.0
+text = "Input somewhere in this viewport to move
+the capsule shape"
+align = 1
+valign = 1

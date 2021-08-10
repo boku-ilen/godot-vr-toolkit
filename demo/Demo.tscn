@@ -1,6 +1,6 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=33 format=2]
 
-[ext_resource path="res://demo/PlayerVR.tscn" type="PackedScene" id=1]
+[ext_resource path="res://demo/PlayerVRDemo.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/vr-toolkit/Gui/GuiToMesh.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/vr-toolkit/Gui/CamToMesh.tscn" type="PackedScene" id=3]
 [ext_resource path="res://demo/ViewportToMesh/UiTest.tscn" type="PackedScene" id=4]
@@ -8,7 +8,6 @@
 [ext_resource path="res://demo/InteractableObjects/GuiObject/GuiObject.tscn" type="PackedScene" id=6]
 [ext_resource path="res://demo/InteractableObjects/PewPew/PewPew.tscn" type="PackedScene" id=7]
 [ext_resource path="res://demo/InteractableObjects/Compass/Compass.tscn" type="PackedScene" id=8]
-[ext_resource path="res://addons/vr-toolkit/Gui/GuiToCurved.tscn" type="PackedScene" id=9]
 [ext_resource path="res://demo/ViewportToMesh/CameraTest.tscn" type="PackedScene" id=10]
 [ext_resource path="res://demo/InteractableObjects/DistanceMeasurement/DistanceMeasurer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://addons/vr-toolkit/Gui/GuiInteraction.tscn" type="PackedScene" id=12]
@@ -23,12 +22,26 @@ extents = Vector3( 5.02755, 1, 4.93471 )
 resource_local_to_scene = true
 size = Vector2( 0.2, 0.2 )
 
+[sub_resource type="ViewportTexture" id=21]
+
+[sub_resource type="SpatialMaterial" id=22]
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = SubResource( 21 )
+
+[sub_resource type="PlaneMesh" id=6]
+resource_local_to_scene = true
+
 [sub_resource type="ViewportTexture" id=23]
 
 [sub_resource type="SpatialMaterial" id=24]
 flags_transparent = true
 flags_unshaded = true
 albedo_texture = SubResource( 23 )
+
+[sub_resource type="PlaneMesh" id=9]
+resource_local_to_scene = true
+size = Vector2( 3, 3 )
 
 [sub_resource type="ViewportTexture" id=25]
 
@@ -37,79 +50,84 @@ flags_transparent = true
 flags_unshaded = true
 albedo_texture = SubResource( 25 )
 
-[sub_resource type="PlaneMesh" id=8]
-resource_local_to_scene = true
-size = Vector2( 3, 3 )
+[sub_resource type="CubeMesh" id=12]
+size = Vector3( 0.1, 1, 0.1 )
 
-[sub_resource type="ViewportTexture" id=27]
-
-[sub_resource type="SpatialMaterial" id=28]
-flags_transparent = true
-flags_unshaded = true
-albedo_texture = SubResource( 27 )
-
-[sub_resource type="PlaneMesh" id=11]
-resource_local_to_scene = true
-
-[sub_resource type="ViewportTexture" id=29]
-
-[sub_resource type="SpatialMaterial" id=30]
-flags_transparent = true
-flags_unshaded = true
-albedo_texture = SubResource( 29 )
-
-[sub_resource type="ProceduralSky" id=14]
-
-[sub_resource type="Environment" id=15]
-background_mode = 2
-background_sky = SubResource( 14 )
-background_color = Color( 0.392157, 0.415686, 0.462745, 1 )
-ambient_light_color = Color( 0.882353, 0.72549, 0.72549, 1 )
-ambient_light_energy = 1.56
-glow_enabled = true
-
-[sub_resource type="CubeMesh" id=16]
-size = Vector3( 0.1, 1.5, 0.1 )
-
-[sub_resource type="CubeMesh" id=17]
+[sub_resource type="CubeMesh" id=13]
 size = Vector3( 1.1, 0.1, 0.7 )
 
-[sub_resource type="BoxShape" id=18]
+[sub_resource type="BoxShape" id=14]
 extents = Vector3( 0.542106, 0.0539003, 0.351908 )
 
-[sub_resource type="CylinderMesh" id=19]
+[sub_resource type="CylinderMesh" id=15]
 resource_local_to_scene = true
 top_radius = 0.2
 bottom_radius = 0.2
 height = 1.0
 
-[sub_resource type="CylinderMesh" id=20]
+[sub_resource type="CylinderMesh" id=16]
 resource_local_to_scene = true
 top_radius = 1.2
 bottom_radius = 0.2
 height = 0.4
 
-[sub_resource type="CylinderMesh" id=21]
+[sub_resource type="CylinderMesh" id=17]
 resource_local_to_scene = true
 top_radius = 0.04
 bottom_radius = 0.03
 height = 1.24651
 
-[sub_resource type="CapsuleMesh" id=22]
+[sub_resource type="CapsuleMesh" id=18]
 resource_local_to_scene = true
 radius = 0.08
 mid_height = 0.13
 radial_segments = 20
 rings = 1
 
+[sub_resource type="ProceduralSky" id=19]
+
+[sub_resource type="Environment" id=20]
+background_mode = 2
+background_sky = SubResource( 19 )
+background_color = Color( 0.392157, 0.415686, 0.462745, 1 )
+ambient_light_color = Color( 0.882353, 0.72549, 0.72549, 1 )
+ambient_light_energy = 1.56
+glow_enabled = true
+
 [node name="Viewport" type="Spatial"]
+
+[node name="PlayerVRDemo" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.971529, 0, 0.236923, 0, 1, 0, -0.236923, 0, 0.971529, 0.124278, 1.06587, 1.4446 )
+
+[node name="ARVRCamera" parent="PlayerVRDemo" index="0"]
+transform = Transform( 0.792223, -0.00124835, -0.610231, -0.160304, 0.964452, -0.210085, 0.5888, 0.264257, 0.763861, 0.3829, 1.25259, -0.166781 )
+far = 500.0
+
+[node name="ObjectInteraction" parent="PlayerVRDemo/Left/Tip" index="0"]
+velocity_samples = 10
+
+[node name="Raw" parent="PlayerVRDemo/Right" index="1"]
+action = ""
+on_hand = 0
+
+[node name="ObjectInteraction" parent="PlayerVRDemo/Right/Tip" index="0"]
+velocity_samples = 10
+
+[node name="GuiInteraction" parent="PlayerVRDemo/Right/Tip" index="1" instance=ExtResource( 12 )]
+enabled = false
+
+[node name="LeftVisual" parent="PlayerVRDemo" index="3"]
+transform = Transform( -0.44268, 0.70426, -0.555031, -0.0521123, 0.597729, 0.800004, 0.895167, 0.383067, -0.227903, 0.387807, 0.64844, -0.182539 )
+
+[node name="RightVisual" parent="PlayerVRDemo" index="4"]
+transform = Transform( 0.256764, -0.852582, 0.45517, 0.0065492, 0.472481, 0.881318, -0.966454, -0.223311, 0.126899, 0.351315, 0.667755, -0.107106 )
 
 [node name="Platforms" type="Spatial" parent="."]
 
 [node name="StaticBody" type="StaticBody" parent="Platforms"]
 
 [node name="MeshInstance" type="MeshInstance" parent="Platforms/StaticBody"]
-transform = Transform( 5, 0, 0, 0, 0.5, 0, 0, 0, 5, 0, 0, 0 )
+transform = Transform( 5, 0, 0, 0, 0.5, 0, 0, 0, 5, 0.00226319, -0.00239158, 0.00953233 )
 mesh = SubResource( 1 )
 material/0 = null
 
@@ -142,7 +160,7 @@ transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.418256, 0 )
 shape = SubResource( 2 )
 
 [node name="StaticBody4" type="StaticBody" parent="Platforms"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.2144, 13.2244, 36.7103 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.2144, 13.8097, 177.491 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Platforms/StaticBody4"]
 transform = Transform( 5, 0, 0, 0, 0.5, 0, 0, 0, 5, 0, 0, 0 )
@@ -150,11 +168,23 @@ mesh = SubResource( 1 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Platforms/StaticBody4"]
-transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.418256, 0 )
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="StaticBody7" type="StaticBody" parent="Platforms"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.2144, 15.5837, 193.582 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Platforms/StaticBody7"]
+transform = Transform( 5, 0, 0, 0, 0.5, 0, 0, 0, 5, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Platforms/StaticBody7"]
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.43828, 0 )
 shape = SubResource( 2 )
 
 [node name="StaticBody5" type="StaticBody" parent="Platforms"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.2144, 17.6026, -87.2491 )
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -17.214, 17.603, -200 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Platforms/StaticBody5"]
 transform = Transform( 5, 0, 0, 0, 0.5, 0, 0, 0, 5, 0, 0, 0 )
@@ -177,149 +207,110 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.418256, 0 )
 shape = SubResource( 2 )
 
-[node name="PlayerVR" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91246, 0 )
-show_controller_left = true
-show_controller_right = true
-show_hand_left = true
-show_hand_right = true
+[node name="Objects" type="Spatial" parent="."]
 
-[node name="ARVRCamera" parent="PlayerVR" index="0"]
-transform = Transform( 0.792223, -0.0012482, -0.61023, -0.160304, 0.964452, -0.210085, 0.5888, 0.264257, 0.763861, 0.3829, 1.25259, -0.166781 )
+[node name="Compass" parent="Objects" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.24094, 1.00404, -0.540624 )
 
-[node name="ObjectInteraction" parent="PlayerVR/Left/Tip" index="2"]
-velocity_samples = 10
-
-[node name="Raw" parent="PlayerVR/Right" index="1"]
-action = ""
-on_hand = 0
-
-[node name="GuiFinger" parent="PlayerVR/Right/Tip/Gestures/HandDefault/Armature/Skeleton/Index" index="0"]
-enabled = false
-
-[node name="GuiInteraction" parent="PlayerVR/Right/Tip" index="1" instance=ExtResource( 12 )]
-enabled = false
-
-[node name="ObjectInteraction" parent="PlayerVR/Right/Tip" index="2"]
-velocity_samples = 10
-
-[node name="LeftVisual" parent="PlayerVR" index="3"]
-transform = Transform( -0.44268, 0.70426, -0.555031, -0.0521123, 0.597729, 0.800004, 0.895167, 0.383067, -0.227903, 0.387807, 0.64844, -0.182539 )
-
-[node name="RightVisual" parent="PlayerVR" index="4"]
-transform = Transform( 0.256764, -0.852582, 0.45517, 0.0065492, 0.472481, 0.881318, -0.966454, -0.223311, 0.126899, 0.351315, 0.667755, -0.107106 )
-show_controller_mesh = false
-
-[node name="Compass" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00404, -1.5636 )
-
-[node name="Ball" parent="." instance=ExtResource( 5 )]
+[node name="Ball" parent="Objects" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66576, 1.0027, 0 )
 
-[node name="PewPew" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8739, -0.83972 )
+[node name="PewPew" parent="Objects" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666053, 1.47127, -2.98422 )
 
-[node name="GuiInteractable" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 0.806094, 0.591788, 0, -0.591788, 0.806094, 0.568637, 1.68151, -2.72126 )
+[node name="GuiInteractable" parent="Objects" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.806094, 0.591788, 0, -0.591788, 0.806094, 0.423922, 1.32478, -2.72126 )
 
-[node name="UIs" type="Spatial" parent="."]
-
-[node name="GuiToMesh" parent="UIs" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.82433, -1.81895 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 24 )
-viewport_element = ExtResource( 4 )
-mesh_size = Vector2( 0.2, 0.2 )
-
-[node name="GuiToCurved" parent="UIs" instance=ExtResource( 9 )]
-transform = Transform( 0.869667, 0.493638, -2.15776e-08, 0, -4.37114e-08, -1, -0.493638, 0.869667, -3.80144e-08, -2.48617, 1.58598, -4.41677 )
-material/0 = SubResource( 26 )
-viewport_element = ExtResource( 4 )
-
-[node name="CamToMesh" parent="UIs" instance=ExtResource( 3 )]
-transform = Transform( 0.702712, 0.711474, -1.15914e-07, 0, -1.62921e-07, -1, -0.711474, 0.702712, -1.14487e-07, -4.21109, 1.97306, -2.32842 )
-mesh = SubResource( 8 )
-material/0 = SubResource( 28 )
-viewport_element = ExtResource( 10 )
-mesh_size = Vector2( 3, 3 )
-
-[node name="GuiToMesh2" parent="UIs" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.60378, -4.87369 )
-mesh = SubResource( 11 )
-material/0 = SubResource( 30 )
-viewport_element = ExtResource( 4 )
-
-[node name="Spatial" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.32514, -1.47501 )
+[node name="DistanceMeasurer" parent="Objects" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.91026, 1.42379, -2.78805 )
 show_controller_hand_meshes = false
 fixed_position = true
 position_in_hand = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.2 )
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 15 )
+[node name="UIs" type="Spatial" parent="."]
+
+[node name="GuiToMesh" parent="UIs" instance=ExtResource( 2 )]
+transform = Transform( 0.998894, 0.0470192, -2.05528e-09, 0, -4.37114e-08, -1, -0.0470192, 0.998894, -4.36631e-08, 0.0272657, 1.30625, -2.42434 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 22 )
+viewport_element = ExtResource( 4 )
+mesh_size = Vector2( 0.2, 0.2 )
+
+[node name="GuiToMesh2" parent="UIs" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.11937, 2.13001, -4.87369 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 24 )
+viewport_element = ExtResource( 4 )
+
+[node name="CamToMesh" parent="UIs" instance=ExtResource( 3 )]
+transform = Transform( 0.702712, 0.711474, -1.15914e-07, 0, -1.62921e-07, -1, -0.711474, 0.702712, -1.14487e-07, -5.01662, 1.97306, -5.00178 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 26 )
+viewport_element = ExtResource( 10 )
+mesh_size = Vector2( 3, 3 )
 
 [node name="Util" type="Spatial" parent="."]
 
 [node name="Table" type="StaticBody" parent="Util"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.344363, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Util/Table"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.75, -2.5 )
-mesh = SubResource( 16 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.976299, -2.5 )
+mesh = SubResource( 12 )
 material/0 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="Util/Table"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -3 )
-mesh = SubResource( 16 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.976299, -3 )
+mesh = SubResource( 12 )
 material/0 = null
 
 [node name="MeshInstance3" type="MeshInstance" parent="Util/Table"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.75, -3 )
-mesh = SubResource( 16 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.976299, -3 )
+mesh = SubResource( 12 )
 material/0 = null
 
 [node name="MeshInstance4" type="MeshInstance" parent="Util/Table"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -2.5 )
-mesh = SubResource( 16 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.976299, -2.5 )
+mesh = SubResource( 12 )
 material/0 = null
 
 [node name="MeshInstance5" type="MeshInstance" parent="Util/Table"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -2.75 )
-mesh = SubResource( 17 )
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Util/Table"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.508846, 1.50503, -2.75122 )
-shape = SubResource( 18 )
+shape = SubResource( 14 )
 
 [node name="Spatial" parent="Util" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -62.5159, 19.7531, 0 )
 
 [node name="Pillar" parent="Util/Spatial" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441999, 0 )
-mesh = SubResource( 19 )
+mesh = SubResource( 15 )
 
 [node name="Plate" parent="Util/Spatial" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.943699, 0 )
-mesh = SubResource( 20 )
+mesh = SubResource( 16 )
 
 [node name="Stick" parent="Util/Spatial" index="3"]
-mesh = SubResource( 21 )
+mesh = SubResource( 17 )
+
+[node name="Knob" parent="Util/Spatial" index="4"]
+collision_layer = 262145
+show_controller_hand_meshes = true
 
 [node name="Mesh" parent="Util/Spatial/Knob" index="0"]
-mesh = SubResource( 22 )
+mesh = SubResource( 18 )
 
-[editable path="PlayerVR"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 20 )
 
-[editable path="PlayerVR/Left"]
+[editable path="PlayerVRDemo"]
 
-[editable path="PlayerVR/Left/Tip/Gestures"]
+[editable path="PlayerVRDemo/Left"]
 
-[editable path="PlayerVR/Left/Tip/Gestures/HandDefault"]
-
-[editable path="PlayerVR/Right"]
-
-[editable path="PlayerVR/Right/Tip/Gestures"]
-
-[editable path="PlayerVR/Right/Tip/Gestures/HandDefault"]
+[editable path="PlayerVRDemo/Right"]
 
 [editable path="Util/Spatial"]
