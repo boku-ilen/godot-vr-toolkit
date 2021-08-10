@@ -1,13 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/godot-openvr/scenes/ovr_controller.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/vr-toolkit/Controller/ARVRController.tscn" type="PackedScene" id=2]
-[ext_resource path="res://demo/PlayerVR.gd" type="Script" id=4]
+[ext_resource path="res://addons/vr-toolkit/PlayerVR.gd" type="Script" id=4]
 [ext_resource path="res://demo/ViewportToMesh/UiTest.tscn" type="PackedScene" id=5]
 [ext_resource path="res://demo/InteractableObjects/Menu/SpawnObjects.tscn" type="PackedScene" id=6]
-[ext_resource path="res://addons/vr-toolkit/Locomotion/RayTeleport.tscn" type="PackedScene" id=7]
-[ext_resource path="res://addons/vr-toolkit/Objects/ObjectInteraction.tscn" type="PackedScene" id=8]
-[ext_resource path="res://addons/vr-toolkit/Controller/Hand/Gestures.tscn" type="PackedScene" id=9]
 
 [node name="PlayerVR" type="ARVROrigin"]
 script = ExtResource( 4 )
@@ -29,13 +26,6 @@ controller_side = 1
 [node name="Base" parent="Left" index="0"]
 on_hand = 2
 
-[node name="RayTeleport" parent="Left/Tip" index="0" instance=ExtResource( 7 )]
-
-[node name="Gestures" parent="Left/Tip" index="1" instance=ExtResource( 9 )]
-controller_side = 1
-
-[node name="ObjectInteraction" parent="Left/Tip" index="2" instance=ExtResource( 8 )]
-
 [node name="Right" parent="." instance=ExtResource( 2 )]
 controller_side = 2
 
@@ -47,10 +37,6 @@ on_hand = 2
 
 [node name="Tip" parent="Right" index="3"]
 on_hand = 2
-
-[node name="Gestures" parent="Right/Tip" index="0" instance=ExtResource( 9 )]
-
-[node name="ObjectInteraction" parent="Right/Tip" index="1" instance=ExtResource( 8 )]
 
 [node name="LeftVisual" parent="." instance=ExtResource( 1 )]
 
