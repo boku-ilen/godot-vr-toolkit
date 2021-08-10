@@ -6,11 +6,6 @@ onready var pew_jectile = preload("res://demo/InteractableObjects/PewPew/PewJect
 onready var meshes = get_node("Spatial")
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
 func interact():
 	var projectile = pew_jectile.instance()
 	var mesh = projectile.get_node("MeshInstance").mesh
